@@ -49,6 +49,18 @@ body {
     margin: 5px 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 5px 0; /* Add some padding */
+    border-bottom: 1px solid #ddd; /* Optional: Add a bottom border for separation */
+    width: 100%;
+}
+
+.link-anchor {
+    display: flex; /* Use flexbox for the emoji and title */
+    align-items: center; /* Center items vertically */
+    text-decoration: none; /* Remove underline from the link */
+    color: #007bff; /* Change link color */
+    flex-grow: 1; /* Allow the link to take up available space */
 }
 
 .link-item a {
@@ -59,4 +71,105 @@ body {
 
 .link-item span {
     margin-right: 8px;
+}
+
+.link-text {
+    flex-grow: 1; /* Allow the link to take up available space */
+    text-decoration: none; /* Remove underline from the link */
+    color: #007bff; /* Change link color */
+}
+
+.edit-icon {
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    display: inline-flex; /* Ensure proper alignment */
+    align-items: center; /* Center the SVG icon */
+    margin-left: 8px; /* Add space between link and icon */
+}
+
+.edit-icon svg {
+    width: 16px;  /* Set width */
+    height: 16px; /* Set height */
+}
+
+/* Modal background */
+
+.modal.hidden {
+    display: none; /* Keeps the modal hidden */
+}
+
+.modal {
+    display: flex; /* Use flexbox to center content */
+    position: fixed; /* Fixed position to cover the whole viewport */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    bottom: 0; /* Align to the bottom */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    z-index: 1000; /* Ensure it appears on top */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: white; /* White background for the modal */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the modal */
+    width: 400px; /* Set width of modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    max-width: 90%; /* Responsive width for smaller screens */
+}
+
+/* Modal title */
+.modal-title {
+    font-size: 1.5rem; /* Font size for title */
+    margin-bottom: 15px; /* Space below title */
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 15px; /* Space between form elements */
+}
+
+/* Label styles */
+.form-label {
+    display: block; /* Labels on new lines */
+    font-weight: bold; /* Bold font for labels */
+    margin-bottom: 5px; /* Space below labels */
+}
+
+/* Input styles */
+.form-input {
+    width: 100%; /* Full width minus padding */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Border around inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
+
+/* Button styles */
+.btn {
+    padding: 10px 15px; /* Padding for buttons */
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Pointer on hover */
+}
+
+.btn-save {
+    background-color: #007bff; /* Blue background for save button */
+    color: white; /* White text for save button */
+    border: none; /* No border */
+}
+
+.btn-save:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.btn-close {
+    background-color: #ccc; /* Gray background for close button */
+    color: black; /* Black text for close button */
+    border: none; /* No border */
+}
+
+.btn-close:hover {
+    background-color: #999; /* Darker gray on hover */
 }

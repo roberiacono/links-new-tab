@@ -1,79 +1,184 @@
+const columnsContainer = document.getElementById("columns-container");
+const addColumnButton = document.getElementById("addColumnButton");
 
-const columnsContainer = document.getElementById('columns-container');
-const addColumnButton = document.getElementById('addColumnButton');
+const editIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+</svg>
+`;
+
+let columnsData = []; // Will be populated in loadColumns()
+
+const defaultData = {
+  columns: [
+    {
+      title: "Sample Column",
+      links: [
+        {
+          emoji: "🔗",
+          text: "OpenAI",
+          url: "https://www.openai.com",
+        },
+        {
+          emoji: "📘",
+          text: "Documentation",
+          url: "https://docs.openai.com",
+        },
+        {
+          emoji: "🌐",
+          text: "Google",
+          url: "https://www.google.com",
+        },
+      ],
+    },
+  ],
+};
 
 // Carica le colonne salvate al caricamento della pagina
-document.addEventListener('DOMContentLoaded', loadColumns);
+document.addEventListener("DOMContentLoaded", loadColumns);
 
 // Aggiunge una nuova colonna quando si clicca sul pulsante "Aggiungi Colonna"
-addColumnButton.addEventListener('click', () => {
-    addColumn();
-    saveColumns();
+addColumnButton.addEventListener("click", () => {
+  addColumn();
+  saveColumns();
 });
 
-function addColumn(title = 'Nuova Colonna', links = []) {
-    const column = document.createElement('div');
-    column.className = 'column';
+function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
+  const column = document.createElement("div");
+  column.className = "column";
 
-    const titleInput = document.createElement('input');
-    titleInput.value = title;
-    titleInput.className = 'column-title';
-    titleInput.oninput = saveColumns;
-    column.appendChild(titleInput);
+  const titleInput = document.createElement("input");
+  titleInput.value = title;
+  titleInput.className = "column-title";
+  titleInput.oninput = saveColumns;
+  column.appendChild(titleInput);
 
-    const addLinkButton = document.createElement('button');
-    addLinkButton.textContent = 'Aggiungi Link';
-    addLinkButton.onclick = () => addLink(column);
-    column.appendChild(addLinkButton);
+  // Add each link, passing columnIndex
+  links.forEach((linkData) => addLink(column, linkData, columnIndex));
 
-    links.forEach(linkData => addLink(column, linkData));
+  const addLinkButton = document.createElement("button");
+  addLinkButton.textContent = "Aggiungi Link";
+  addLinkButton.onclick = () => {
+    const newLinkData = { emoji: "🔗", text: "Nuovo Link", url: "#" };
+    columnsData[columnIndex].links.push(newLinkData); // Add new link to columnsData
+    addLink(column, newLinkData, columnIndex);
+    saveColumns(); // Save after adding a new link
+  };
+  column.appendChild(addLinkButton);
 
-    columnsContainer.appendChild(column);
+  columnsContainer.appendChild(column);
 }
 
-function addLink(column, linkData = { emoji: '🔗', text: 'Nuovo Link', url: '#' }) {
-    const linkItem = document.createElement('div');
-    linkItem.className = 'link-item';
+function addLink(column, linkData, columnIndex) {
+  const linkItem = document.createElement("div");
+  linkItem.className = "link-item";
 
-    const emojiInput = document.createElement('input');
-    emojiInput.value = linkData.emoji;
-    emojiInput.size = 1;
-    emojiInput.oninput = saveColumns;
-    linkItem.appendChild(emojiInput);
+  // Create the link as an <a> element
+  const linkAnchor = document.createElement("a");
+  linkAnchor.href = linkData.url;
+  linkAnchor.target = "_blank";
+  linkAnchor.className = "link-anchor"; // New class for the anchor
+  linkAnchor.style.display = "flex"; // Use flex for the emoji and text alignment
+  linkAnchor.style.alignItems = "center"; // Center items vertically
 
-    const linkText = document.createElement('a');
-    linkText.href = linkData.url;
-    linkText.target = '_blank';
-    linkText.textContent = linkData.text;
-    linkText.contentEditable = true;
-    linkText.onblur = saveColumns;
-    linkItem.appendChild(linkText);
+  // Emoji as a div
+  const emojiDiv = document.createElement("div");
+  emojiDiv.textContent = linkData.emoji;
+  emojiDiv.className = "emoji";
+  linkAnchor.appendChild(emojiDiv); // Add emoji to the anchor
 
-    column.appendChild(linkItem);
+  // Title as a div
+  const titleDiv = document.createElement("div");
+  titleDiv.textContent = linkData.text;
+  titleDiv.className = "link-text"; // Class for link text
+  linkAnchor.appendChild(titleDiv); // Add title to the anchor
+
+  // Add the anchor to the link item
+  linkItem.appendChild(linkAnchor);
+
+  // Edit icon (SVG)
+  const editIcon = document.createElement("div");
+  editIcon.innerHTML = editIconSVG;
+  editIcon.className = "edit-icon";
+  editIcon.onclick = () => {
+    const linkIndex = Array.from(
+      column.getElementsByClassName("link-item")
+    ).indexOf(linkItem);
+    openEditModal(linkData, columnIndex, linkIndex);
+  };
+  linkItem.appendChild(editIcon);
+
+  column.appendChild(linkItem);
 }
 
 function saveColumns() {
-    const columnsData = Array.from(columnsContainer.getElementsByClassName('column')).map(column => {
-        return {
-            title: column.querySelector('.column-title').value,
-            links: Array.from(column.getElementsByClassName('link-item')).map(item => {
-                const emoji = item.querySelector('input').value;
-                const linkText = item.querySelector('a').textContent;
-                const url = item.querySelector('a').href;
-                return { emoji, text: linkText, url };
-            })
-        };
-    });
+  // Salva columnsData come stringa JSON in chrome.storage.sync
+  chrome.storage.sync.set({ columns: JSON.stringify(columnsData) }, () => {
+    console.log("Data saved successfully!");
+  });
+}
 
-    chrome.storage.sync.set({ columns: columnsData });
+// Function to open the edit modal
+function openEditModal(linkData, columnIndex, linkIndex) {
+  const editModal = document.getElementById("editModal");
+  const urlInput = document.getElementById("url");
+  const titleInput = document.getElementById("title");
+  const emojiSelect = document.getElementById("emoji");
+
+  // Populate the inputs with current data
+  urlInput.value = linkData.url;
+  titleInput.value = linkData.text;
+  emojiSelect.value = linkData.emoji; // Set the selected emoji
+
+  // Show the modal
+  editModal.classList.remove("hidden");
+
+  // Save button event listener
+  document.getElementById("saveButton").onclick = () => {
+    // Update columnsData with new values from modal inputs
+    columnsData[columnIndex].links[linkIndex].emoji = emojiSelect.value;
+    columnsData[columnIndex].links[linkIndex].text = titleInput.value;
+    columnsData[columnIndex].links[linkIndex].url = urlInput.value;
+
+    // Update the displayed values on screen
+    const columnElement =
+      columnsContainer.getElementsByClassName("column")[columnIndex];
+    const linkItem =
+      columnElement.getElementsByClassName("link-item")[linkIndex];
+
+    // Update emoji and title in the DOM
+    linkItem.querySelector(".emoji").textContent = emojiSelect.value;
+    linkItem.querySelector(".link-text").textContent = titleInput.value;
+    linkItem.querySelector("a").href = urlInput.value;
+
+    saveColumns(); // Optionally save columns to storage
+    closeEditModal(); // Close the modal
+  };
+
+  // Close button event listener
+  document.getElementById("closeButton").onclick = closeEditModal;
+}
+
+// Function to close the edit modal
+function closeEditModal() {
+  const editModal = document.getElementById("editModal");
+  editModal.classList.add("hidden"); // Hide the modal
 }
 
 function loadColumns() {
-    chrome.storage.sync.get('columns', data => {
-        if (data.columns) {
-            data.columns.forEach(columnData => {
-                addColumn(columnData.title, columnData.links);
-            });
-        }
+  //chrome.storage.sync.clear();
+  chrome.storage.sync.get("columns", (data) => {
+    if (data.columns) {
+      columnsData = JSON.parse(data.columns); // Parse the JSON string
+    } else {
+      // Use default data if nothing is saved in storage
+      columnsData = defaultData.columns;
+      // Save this default data to storage
+      chrome.storage.sync.set({ columns: JSON.stringify(columnsData) });
+    }
+    console.log("columnsData", columnsData);
+    // Load columns to the UI
+    columnsData.forEach((columnData, index) => {
+      addColumn(columnData.title, columnData.links, index);
     });
+  });
 }
