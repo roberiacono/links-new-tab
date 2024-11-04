@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", loadColumns);
 
 // Aggiunge una nuova colonna quando si clicca sul pulsante "Aggiungi Colonna"
 addColumnButton.addEventListener("click", () => {
-  addColumn();
+  const columnIndex = columnsData.length; // Ottieni l'indice per la nuova colonna
+  addColumn("Nuova Colonna", [], columnIndex);
   saveColumns();
 });
 
@@ -51,11 +52,29 @@ function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
   const column = document.createElement("div");
   column.className = "column";
 
+  // Crea un contenitore per il titolo e l'icona di eliminazione
+  const header = document.createElement("div");
+  header.className = "column-header";
+
   const titleInput = document.createElement("input");
   titleInput.value = title;
   titleInput.className = "column-title";
   titleInput.oninput = saveColumns;
-  column.appendChild(titleInput);
+  header.appendChild(titleInput); // Aggiungi il titolo al contenitore
+
+  const deleteColumnIcon = document.createElement("div");
+  deleteColumnIcon.innerHTML = deleteIconSVG;
+  deleteColumnIcon.className = "delete-column-icon";
+
+  // Funzionalità di eliminazione della colonna
+  deleteColumnIcon.onclick = () => {
+    columnsData.splice(columnIndex, 1); // Rimuovi la colonna dall'array
+    column.remove(); // Rimuovi la colonna dall'interfaccia utente
+    saveColumns(); // Salva le modifiche alle colonne
+  };
+
+  header.appendChild(deleteColumnIcon); // Aggiungi l'icona di eliminazione al contenitore
+  column.appendChild(header); // Aggiungi il contenitore alla colonna
 
   // Wrapper per i link
   const linksWrapper = document.createElement("div");
@@ -77,6 +96,11 @@ function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
   column.appendChild(addLinkButton);
 
   columnsContainer.appendChild(column);
+
+  columnsData[columnIndex] = {
+    links: links,
+    title: title,
+  };
 }
 
 function addLink(linksWrapper, linkData, columnIndex) {

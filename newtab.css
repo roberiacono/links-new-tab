@@ -8,7 +8,6 @@ body {
 }
 
 #main-container {
-    width: 80%;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -23,30 +22,50 @@ body {
 }
 
 #columns-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;                     /* Utilizza Grid Layout */
+    grid-template-columns: repeat(3, 1fr); /* Tre colonne uguali */
+    gap: 10px;                         /* Spazio tra le colonne */                   /* Padding attorno al contenitore principale */
 }
 
 .column {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
     padding: 15px;
-    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.column h3 {
-    font-size: 18px;
-    margin: 0;
-    margin-bottom: 10px;
+.column-header {
+    display: flex;                 /* Flexbox per allineare il titolo e l'icona nella stessa riga */
+    align-items: center;           /* Allinea gli elementi verticalmente al centro */
+    justify-content: space-between; /* Spazio tra il titolo e l'icona */
+    box-sizing: border-box; /* Include padding and border in element's total width */
+    width: 100%;
 }
+
+.column-title {
+    flex: 1;                       /* Consenti al titolo di occupare lo spazio disponibile */
+    padding: 10px;                /* Aggiungi un po' di padding */
+    width: inherit;
+    font-size: 1.5em;
+    font-weight: 500;;
+    border: none;
+    margin-bottom: 15px;
+    background-color: transparent;
+}
+
+.delete-column-icon {
+    cursor: pointer;               /* Cambia il cursore per indicare che è cliccabile */
+    margin-left: 10px;            /* Margine per separare l'icona dal titolo */
+}
+
 
 .links-wrapper{
     width: 100%;
+    margin-bottom: 15px;
 }
 
 .link-item {
@@ -84,7 +103,8 @@ body {
 }
 
 .edit-icon,
-.delete-icon {
+.delete-icon,
+.delete-column-icon {
     cursor: pointer; /* Change cursor to indicate it's clickable */
     display: inline-flex; /* Ensure proper alignment */
     align-items: center; /* Center the SVG icon */
@@ -92,7 +112,8 @@ body {
 }
 
 .edit-icon svg,
-.delete-icon svg {
+.delete-icon svg,
+.delete-column-icon svg {
     width: 16px;  /* Set width */
     height: 16px; /* Set height */
 }
