@@ -52,23 +52,29 @@ function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
   titleInput.oninput = saveColumns;
   column.appendChild(titleInput);
 
-  // Add each link, passing columnIndex
-  links.forEach((linkData) => addLink(column, linkData, columnIndex));
+  // Wrapper per i link
+  const linksWrapper = document.createElement("div");
+  linksWrapper.className = "links-wrapper";
+  column.appendChild(linksWrapper);
+
+  // Aggiungi i link esistenti al wrapper
+  links.forEach((linkData) => addLink(linksWrapper, linkData, columnIndex));
 
   const addLinkButton = document.createElement("button");
   addLinkButton.textContent = "Aggiungi Link";
-  addLinkButton.onclick = () => {
-    const newLinkData = { emoji: "🔗", text: "Nuovo Link", url: "#" };
-    columnsData[columnIndex].links.push(newLinkData); // Add new link to columnsData
-    addLink(column, newLinkData, columnIndex);
-    saveColumns(); // Save after adding a new link
-  };
+  addLinkButton.onclick = () =>
+    openEditModal(
+      { emoji: "", text: "", url: "" },
+      columnIndex,
+      null,
+      linksWrapper
+    );
   column.appendChild(addLinkButton);
 
   columnsContainer.appendChild(column);
 }
 
-function addLink(column, linkData, columnIndex) {
+function addLink(linksWrapper, linkData, columnIndex) {
   const linkItem = document.createElement("div");
   linkItem.className = "link-item";
 
@@ -101,13 +107,13 @@ function addLink(column, linkData, columnIndex) {
   editIcon.className = "edit-icon";
   editIcon.onclick = () => {
     const linkIndex = Array.from(
-      column.getElementsByClassName("link-item")
+      linksWrapper.getElementsByClassName("link-item")
     ).indexOf(linkItem);
-    openEditModal(linkData, columnIndex, linkIndex);
+    openEditModal(linkData, columnIndex, linkIndex, linksWrapper);
   };
   linkItem.appendChild(editIcon);
 
-  column.appendChild(linkItem);
+  linksWrapper.appendChild(linkItem);
 }
 
 function saveColumns() {
@@ -118,44 +124,55 @@ function saveColumns() {
 }
 
 // Function to open the edit modal
-function openEditModal(linkData, columnIndex, linkIndex) {
+function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
   const emojiSelect = document.getElementById("emoji");
 
   // Populate the inputs with current data
-  urlInput.value = linkData.url;
-  titleInput.value = linkData.text;
-  emojiSelect.value = linkData.emoji; // Set the selected emoji
+  urlInput.value = linkData.url || "";
+  titleInput.value = linkData.text || "";
+  emojiSelect.value = linkData.emoji || "";
 
   // Show the modal
   editModal.classList.remove("hidden");
 
   // Save button event listener
   document.getElementById("saveButton").onclick = () => {
-    // Update columnsData with new values from modal inputs
-    columnsData[columnIndex].links[linkIndex].emoji = emojiSelect.value;
-    columnsData[columnIndex].links[linkIndex].text = titleInput.value;
-    columnsData[columnIndex].links[linkIndex].url = urlInput.value;
+    const newLinkData = {
+      emoji: emojiSelect.value,
+      text: titleInput.value,
+      url: urlInput.value,
+    };
 
-    // Update the displayed values on screen
-    const columnElement =
-      columnsContainer.getElementsByClassName("column")[columnIndex];
-    const linkItem =
-      columnElement.getElementsByClassName("link-item")[linkIndex];
+    if (linkIndex === null) {
+      // Se linkIndex è null, aggiungiamo un nuovo link
+      columnsData[columnIndex].links.push(newLinkData);
+      addLink(linksWrapper, newLinkData, columnIndex);
+    } else {
+      // Aggiorna un link esistente
+      columnsData[columnIndex].links[linkIndex] = newLinkData;
+      updateLinkDisplay(linksWrapper, newLinkData, linkIndex);
+    }
 
-    // Update emoji and title in the DOM
-    linkItem.querySelector(".emoji").textContent = emojiSelect.value;
-    linkItem.querySelector(".link-text").textContent = titleInput.value;
-    linkItem.querySelector("a").href = urlInput.value;
-
-    saveColumns(); // Optionally save columns to storage
-    closeEditModal(); // Close the modal
+    saveColumns(); // Salva i dati aggiornati
+    closeEditModal(); // Chiude il modal
   };
 
   // Close button event listener
   document.getElementById("closeButton").onclick = closeEditModal;
+}
+
+// Funzione per aggiornare l'interfaccia di un link esistente
+function updateLinkDisplay(linksWrapper, linkData, linkIndex) {
+  console.log("updateLinkDisplay", linksWrapper, linkData, linkIndex);
+  const linkItems = linksWrapper.getElementsByClassName("link-item");
+  const linkItem = linkItems[linkIndex];
+
+  linkItem.querySelector(".emoji").textContent = linkData.emoji;
+  linkItem.querySelector(".link-text").textContent = linkData.text;
+  linkItem.querySelector("a").href = linkData.url;
 }
 
 // Function to close the edit modal
