@@ -45,6 +45,10 @@ body {
     margin-bottom: 10px;
 }
 
+.links-wrapper{
+    width: 100%;
+}
+
 .link-item {
     margin: 5px 0;
     display: flex;
@@ -69,7 +73,7 @@ body {
     font-size: 16px;
 }
 
-.link-item span {
+.link-item .emoji {
     margin-right: 8px;
 }
 
@@ -79,14 +83,16 @@ body {
     color: #007bff; /* Change link color */
 }
 
-.edit-icon {
+.edit-icon,
+.delete-icon {
     cursor: pointer; /* Change cursor to indicate it's clickable */
     display: inline-flex; /* Ensure proper alignment */
     align-items: center; /* Center the SVG icon */
     margin-left: 8px; /* Add space between link and icon */
 }
 
-.edit-icon svg {
+.edit-icon svg,
+.delete-icon svg {
     width: 16px;  /* Set width */
     height: 16px; /* Set height */
 }
