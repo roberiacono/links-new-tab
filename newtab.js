@@ -245,19 +245,52 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
-  const emojiSelect = document.getElementById("emoji");
   const faviconOption = document.getElementById("faviconOption");
   const faviconPreview = document.getElementById("faviconPreview");
   const emojiOption = document.getElementById("emojiOption");
   const emptyOption = document.getElementById("emptyOption");
+  const selectedEmoji = document.getElementById("selectedEmoji");
+  const pickerContainer = document.getElementById("pickerContainer");
+  const emojiModal = document.getElementById("emojiModal");
 
   const linkData = columnsData[columnIndex].links[linkIndex];
   console.log("linkData in open modal", linkData);
 
+  // Inizializza il picker e nascondilo
+  const picker = new EmojiMart.Picker({
+    onEmojiSelect: (emoji) => {
+      selectedEmoji.textContent = emoji.native; // Aggiorna l'emoji visualizzata
+      linkData.emoji = emoji.native;
+      emojiModal.classList.add("hidden"); // Nascondi il picker dopo la selezione
+    },
+  });
+  pickerContainer.appendChild(picker);
+
+  // Mostra il picker al click sul radio button o sull'emoji
+  emojiOption.addEventListener("click", (event) => {
+    emojiOption.checked = true; // Check emoji radio button when emoji is selected
+    event.stopPropagation(); // Evita che il click sul radio trigger il listener sul document
+  });
+
+  selectedEmoji.addEventListener("click", (event) => {
+    emojiOption.checked = true; // Check emoji radio button when emoji is selected
+    emojiModal.classList.remove("hidden"); // Mostra o nascondi il picker
+    event.stopPropagation(); // Evita che il click sul radio trigger il listener sul document
+  });
+
+  // Chiude il picker se si clicca fuori da esso
+  document.addEventListener("click", (event) => {
+    if (
+      !pickerContainer.contains(event.target) &&
+      !emojiOption.contains(event.target)
+    ) {
+      emojiModal.classList.add("hidden"); // Chiude il picker se il click è fuori
+    }
+  });
+
   // Populate the inputs with current data
   urlInput.value = linkData.url || "";
   titleInput.value = linkData.text || "";
-  emojiSelect.value = linkData.emoji || "🔗";
   faviconOption.checked = linkData.icon === "favicon" ? true : false;
   emojiOption.checked = linkData.icon === "emoji" ? true : false;
   emptyOption.checked = !linkData.icon ? true : false;
@@ -277,10 +310,6 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
     }
   });
 
-  emojiSelect.addEventListener("click", () => {
-    emojiOption.checked = true; // Check emoji radio button when emoji is selected
-  });
-
   // Show the modal
   editModal.classList.remove("hidden");
 
@@ -289,7 +318,7 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
     //const linkData = columnsData[columnIndex].links[linkIndex];
     console.log("on save", linkData, columnIndex, linkIndex);
     const newLinkData = {
-      emoji: emojiSelect.value,
+      emoji: linkData.emoji,
       text: titleInput.value,
       url: urlInput.value,
       imageUrl: linkData.imageUrl || null,

@@ -41,23 +41,16 @@
                         <img id="faviconPreview" src="assets/images/favicon-empty.png" alt="" class="icon-preview" />
                     </label>
                     <label>
-                        <input type="radio" name="icon-choice" id="emojiOption" value="emoji" />
-                        <select id="emoji" class="form-input">
-                            <option value="🔗">🔗 Link</option>
-                            <option value="✨">✨ Sparkle</option>
-                            <option value="📘">📘 Book</option>
-                            <option value="🌐">🌐 Globe</option>
-                            <option value="🎉">🎉 Party</option>
-                            <option value="💡">💡 Idea</option>
-                            <option value="👍">👍 Thumbs Up</option>
-                            <option value="❤️">❤️ Heart</option>
-                            <option value="🚀">🚀 Rocket</option>
-                            <option value="🛠️">🛠️ Tools</option>
-                            <option value="📝">📝 Note</option>
-                            <!-- Add more emojis as needed -->
-                        </select>
+                        <div id="emojiSelector" class="emoji-radio-group">
+                            <input type="radio" name="icon-choice" id="emojiOption" value="emoji" />
+                            
+                              <span id="selectedEmoji" class="emoji-display">😊</span> <!-- Emoji predefinita -->
+                            
+                          </div>
                     </label>
-                    
+                    <div id="emojiModal" class="modal hidden">
+                      <div id="pickerContainer"></div> <!-- Picker inizialmente nascosto -->
+                    </div>
                 </div>
             </div>
 
@@ -69,8 +62,9 @@
     </div>
 </div>
 
-
     <script src="assets/js/Sortable.min.js"></script>
+    <script src="assets/js/browser.js"></script>
     <script src="newtab.js"></script>
+
 </body>
 </html>

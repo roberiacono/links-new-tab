@@ -237,7 +237,7 @@ button svg {
 
 .radio-group {
     display: flex;
-    flex-direction: column;
+    
     justify-content: space-between;
     margin-top: 10px;
     gap: 10px;
@@ -272,4 +272,26 @@ button svg {
 
 .btn-close:hover {
     background-color: #999; /* Darker gray on hover */
+}
+
+
+
+.emoji-radio-group {
+    display: flex;
+    align-items: center;
+  }
+  
+.emoji-display {
+    font-size: 16px; /* Dimensione dell’emoji */
+    cursor: pointer;
+}
+  
+.hidden {
+    display: none;
+}
+  
+#pickerContainer {
+    position: absolute;
+    top: 50px;
+    z-index: 1000; /* Assicura che il picker stia sopra altri elementi */
 }
