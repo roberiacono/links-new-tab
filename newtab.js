@@ -11,6 +11,10 @@ const deleteIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewB
 </svg>
 `;
 
+const plusIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>`;
+
 let columnsData = []; // Will be populated in loadColumns()
 
 const defaultData = {
@@ -44,11 +48,16 @@ document.addEventListener("DOMContentLoaded", loadColumns);
 // Aggiunge una nuova colonna quando si clicca sul pulsante "Aggiungi Colonna"
 addColumnButton.addEventListener("click", () => {
   const columnIndex = columnsData.length; // Ottieni l'indice per la nuova colonna
-  addColumn("Nuova Colonna", [], columnIndex);
+  addColumn("", [], columnIndex, true);
   saveColumns();
 });
 
-function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
+function addColumn(
+  title = "Nuova Colonna",
+  links = [],
+  columnIndex,
+  isAddNewColumn = false
+) {
   const column = document.createElement("div");
   column.className = "column";
 
@@ -59,8 +68,20 @@ function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
   const titleInput = document.createElement("input");
   titleInput.value = title;
   titleInput.className = "column-title";
-  titleInput.oninput = saveColumns;
+  //   titleInput.oninput = saveColumns;
+
+  // Aggiungi un evento onchange per salvare il titolo quando cambia
+  titleInput.onchange = () => {
+    columnsData[columnIndex].title = titleInput.value; // Aggiorna il titolo nella struttura dati
+    saveColumns(); // Salva i dati aggiornati
+  };
+
   header.appendChild(titleInput); // Aggiungi il titolo al contenitore
+
+  // Focus sull'input del titolo subito dopo aver aggiunto la colonna
+  if (isAddNewColumn) {
+    setTimeout(() => titleInput.focus(), 0);
+  }
 
   const deleteColumnIcon = document.createElement("div");
   deleteColumnIcon.innerHTML = deleteIconSVG;
@@ -85,7 +106,8 @@ function addColumn(title = "Nuova Colonna", links = [], columnIndex) {
   links.forEach((linkData) => addLink(linksWrapper, linkData, columnIndex));
 
   const addLinkButton = document.createElement("button");
-  addLinkButton.textContent = "Aggiungi Link";
+  addLinkButton.className = "add-link";
+  addLinkButton.innerHTML = plusIconSVG + "Aggiungi Link";
   addLinkButton.onclick = () =>
     openEditModal(
       { emoji: "", text: "", url: "" },
@@ -117,7 +139,18 @@ function addLink(linksWrapper, linkData, columnIndex) {
 
   // Emoji as a div
   const emojiDiv = document.createElement("div");
-  emojiDiv.textContent = linkData.emoji;
+
+  if (linkData.icon) {
+    if (linkData.icon === "favicon" && linkData.imageUrl) {
+      emojiDiv.innerHTML = `<img src="${linkData.imageUrl}" alt="icon" style="width: 16px; height: 16px;">`;
+    } else if (linkData.icon === "emoji") {
+      emojiDiv.textContent = linkData.emoji;
+    }
+  } else {
+    emojiDiv.textContent = "";
+  }
+
+  //emojiDiv.textContent = linkData.emoji;
   emojiDiv.className = "emoji";
   linkAnchor.appendChild(emojiDiv); // Add emoji to the anchor
 
@@ -138,7 +171,7 @@ function addLink(linksWrapper, linkData, columnIndex) {
     const linkIndex = Array.from(
       linksWrapper.getElementsByClassName("link-item")
     ).indexOf(linkItem);
-    openEditModal(linkData, columnIndex, linkIndex, linksWrapper);
+    openEditModal(columnIndex, linkIndex, linksWrapper);
   };
   linkItem.appendChild(editIcon);
 
@@ -165,31 +198,68 @@ function saveColumns() {
   // Salva columnsData come stringa JSON in chrome.storage.sync
   chrome.storage.sync.set({ columns: JSON.stringify(columnsData) }, () => {
     console.log("Data saved successfully!");
+    console.log("columnsData", columnsData);
   });
 }
 
 // Function to open the edit modal
-function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
+function openEditModal(columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
   const emojiSelect = document.getElementById("emoji");
+  const faviconOption = document.getElementById("faviconOption");
+  const faviconPreview = document.getElementById("faviconPreview");
+  const emojiOption = document.getElementById("emojiOption");
+  const emptyOption = document.getElementById("emptyOption");
+
+  const linkData = columnsData[columnIndex].links[linkIndex];
+  console.log("linkData in open modal", linkData);
 
   // Populate the inputs with current data
   urlInput.value = linkData.url || "";
   titleInput.value = linkData.text || "";
-  emojiSelect.value = linkData.emoji || "";
+  emojiSelect.value = linkData.emoji || "🔗";
+  faviconOption.checked = linkData.icon === "favicon" ? true : false;
+  emojiOption.checked = linkData.icon === "emoji" ? true : false;
+  emptyOption.checked = !linkData.icon ? true : false;
+
+  // Fetch favicon when URL is updated
+  urlInput.addEventListener("change", () => {
+    const url = urlInput.value.trim();
+    if (url) {
+      const faviconUrl =
+        "https://www.google.com/s2/favicons?domain=" + new URL(url).hostname;
+      faviconPreview.src = faviconUrl;
+      faviconOption.checked = true; // Default to favicon on URL change
+      linkData.imageUrl = faviconUrl; // Store favicon URL
+    }
+  });
+
+  emojiSelect.addEventListener("click", () => {
+    emojiOption.checked = true; // Check emoji radio button when emoji is selected
+  });
 
   // Show the modal
   editModal.classList.remove("hidden");
 
   // Save button event listener
   document.getElementById("saveButton").onclick = () => {
+    const linkData = columnsData[columnIndex].links[linkIndex];
+    console.log("on save", linkData, columnIndex, linkIndex);
     const newLinkData = {
       emoji: emojiSelect.value,
       text: titleInput.value,
       url: urlInput.value,
+      imageUrl: linkData.imageUrl,
+      icon: faviconOption.checked
+        ? "favicon"
+        : emojiOption.checked
+        ? "emoji"
+        : null,
     };
+
+    console.log("newLinkData", newLinkData);
 
     if (linkIndex === null) {
       // Se linkIndex è null, aggiungiamo un nuovo link
@@ -211,11 +281,25 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
 
 // Funzione per aggiornare l'interfaccia di un link esistente
 function updateLinkDisplay(linksWrapper, linkData, linkIndex) {
-  console.log("updateLinkDisplay", linksWrapper, linkData, linkIndex);
+  console.log("updateLinkDisplay", linkData, linkIndex);
   const linkItems = linksWrapper.getElementsByClassName("link-item");
   const linkItem = linkItems[linkIndex];
 
-  linkItem.querySelector(".emoji").textContent = linkData.emoji;
+  if (linkData.icon) {
+    if (linkData.icon === "favicon") {
+      // Usa l'immagine
+      linkItem.querySelector(
+        ".emoji"
+      ).innerHTML = `<img src="${linkData.imageUrl}" alt="icon" style="width: 16px; height: 16px;">`;
+    } else {
+      // Usa l'emoji
+      linkItem.querySelector(".emoji").textContent = linkData.emoji;
+    }
+  } else {
+    linkItem.querySelector(".emoji").textContent = "";
+  }
+
+  //linkItem.querySelector(".emoji").textContent = linkData.emoji;
   linkItem.querySelector(".link-text").textContent = linkData.text;
   linkItem.querySelector("a").href = linkData.url;
 }

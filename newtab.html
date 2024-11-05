@@ -9,8 +9,10 @@
 </head>
 <body>
     <div id="main-container">
-        <button id="addColumnButton">Aggiungi Colonna</button>
-        <div id="columns-container"></div>
+        <button id="addColumnButton" class="add-column"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg> Aggiungi Colonna</button>
+        <div id="columns-container" class=""></div>
     </div>
 
 <!-- Modal -->
@@ -18,23 +20,7 @@
     <div class="modal-content">
         <h2 class="modal-title">Edit Link</h2>
         <form id="editForm">
-            <div class="form-group">
-            <label for="emoji" class="form-label">Emoji:</label>
-            <select id="emoji" class="form-input" required>
-                <option value="🔗">🔗 Link</option>
-                <option value="✨">✨ Sparkle</option>
-                <option value="📘">📘 Book</option>
-                <option value="🌐">🌐 Globe</option>
-                <option value="🎉">🎉 Party</option>
-                <option value="💡">💡 Idea</option>
-                <option value="👍">👍 Thumbs Up</option>
-                <option value="❤️">❤️ Heart</option>
-                <option value="🚀">🚀 Rocket</option>
-                <option value="🛠️">🛠️ Tools</option>
-                <option value="📝">📝 Note</option>
-                <!-- Add more emojis as needed -->
-            </select>
-            </div>
+            
             <div class="form-group">
                 <label for="url" class="form-label">URL:</label>
                 <input type="url" id="url" class="form-input" required>
@@ -43,6 +29,37 @@
                 <label for="title" class="form-label">Title:</label>
                 <input type="text" id="title" class="form-input" required>
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Icon:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="icon-choice" id="faviconOption" value="favicon" />
+                        <img id="faviconPreview" src="images/favicon-empty.png" alt="" class="icon-preview" />
+                    </label>
+                    <label>
+                        <input type="radio" name="icon-choice" id="emojiOption" value="emoji" />
+                        <select id="emoji" class="form-input">
+                            <option value="🔗">🔗 Link</option>
+                            <option value="✨">✨ Sparkle</option>
+                            <option value="📘">📘 Book</option>
+                            <option value="🌐">🌐 Globe</option>
+                            <option value="🎉">🎉 Party</option>
+                            <option value="💡">💡 Idea</option>
+                            <option value="👍">👍 Thumbs Up</option>
+                            <option value="❤️">❤️ Heart</option>
+                            <option value="🚀">🚀 Rocket</option>
+                            <option value="🛠️">🛠️ Tools</option>
+                            <option value="📝">📝 Note</option>
+                            <!-- Add more emojis as needed -->
+                        </select>
+                    </label>
+                    <label>
+                        <input type="radio" name="icon-choice" id="emptyOption" value="empy" checked /> None
+                    </label>
+                </div>
+            </div>
+
             <div class="form-actions">
                 <button type="button" id="saveButton" class="btn btn-save">Save</button>
                 <button type="button" id="closeButton" class="btn btn-close">Close</button>
