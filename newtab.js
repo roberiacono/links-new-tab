@@ -241,7 +241,7 @@ function saveColumns() {
 }
 
 // Function to open the edit modal
-function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
+function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
@@ -251,7 +251,7 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const emojiOption = document.getElementById("emojiOption");
   const emptyOption = document.getElementById("emptyOption");
 
-  //const linkData = columnsData[columnIndex].links[linkIndex];
+  const linkData = columnsData[columnIndex].links[linkIndex];
   console.log("linkData in open modal", linkData);
 
   // Populate the inputs with current data
@@ -261,6 +261,9 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   faviconOption.checked = linkData.icon === "favicon" ? true : false;
   emojiOption.checked = linkData.icon === "emoji" ? true : false;
   emptyOption.checked = !linkData.icon ? true : false;
+  faviconPreview.src = linkData.imageUrl
+    ? linkData.imageUrl
+    : chrome.runtime.getURL("assets/images/favicon-empty.png");
 
   // Fetch favicon when URL is updated
   urlInput.addEventListener("change", () => {

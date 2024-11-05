@@ -28,6 +28,9 @@ button.add-column {
     background-color: #18181b;
     color: #fafafa;
 }
+button.add-column:hover {
+    opacity: 0.9;
+}
 button.add-column svg {
     color: #fafafa; /* Cambia 'red' con il colore desiderato */
     stroke-width: 3
@@ -38,12 +41,11 @@ button.add-link {
     background: transparent;
     border: none;
     margin-top: auto;
-    opacity: 0.8;
-    transition-duration: 0.2s;
     padding: 15px;
+    color: #71717a;
 }
 button.add-link:hover {
-    opacity: 1;
+    color: inherit;
 }
 
 #main-container {
@@ -65,8 +67,8 @@ button.add-link:hover {
 .column {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -78,7 +80,7 @@ button.add-link:hover {
     justify-content: space-between; /* Spazio tra il titolo e l'icona */
     box-sizing: border-box; /* Include padding and border in element's total width */
     width: 100%;
-    padding: 15px;
+    padding: 10px 15px;
     border-bottom: 1px solid #ecf0f1;
 }
 
@@ -90,6 +92,7 @@ button.add-link:hover {
     font-weight: 500;;
     border: none;
     background-color: transparent;
+    color: #09090b;
     transition-duration: 0.3s;
 }
 
@@ -118,19 +121,28 @@ button.add-link:hover {
     box-sizing: border-box;
 }
 
+.link-item:hover {
+    background-color: #fff;
+}
+
 .link-anchor {
     display: flex; /* Use flexbox for the emoji and title */
     align-items: center; /* Center items vertically */
     flex-grow: 1; /* Allow the link to take up available space */
     font-size: 16px;
+    color: #71717a;
 }
 .link-anchor.not-linked {
-    color: #888;
+    
 }
 
 .link-item a {
     text-decoration: none;
-    color: inherit;
+    color: #71717a;
+}
+
+.link-item a:hover {
+    color: #09090b;
 }
 
 .link-item .emoji {
@@ -150,6 +162,7 @@ button.add-link:hover {
     margin-left: 8px; /* Add space between link and icon */
     display: none;
     transition-duration: 0.2s;
+    color: #71717a;
 }
 
 .link-item:hover .edit-icon,
@@ -224,8 +237,10 @@ button svg {
 
 .radio-group {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-top: 10px;
+    gap: 10px;
   }
   .radio-group label {
     display: flex;
