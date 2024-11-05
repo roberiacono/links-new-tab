@@ -172,7 +172,7 @@ function addLink(linksWrapper, linkData, columnIndex) {
     linkAnchor.className = "link-anchor"; // New class for the anchor
   } else {
     linkAnchor = document.createElement("div");
-    linkAnchor.className = "link-anchor"; // New class for the anchor
+    linkAnchor.className = "link-anchor not-linked"; // New class for the anchor
   }
 
   // Emoji as a div
