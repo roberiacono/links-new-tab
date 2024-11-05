@@ -241,7 +241,7 @@ function saveColumns() {
 }
 
 // Function to open the edit modal
-function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
+function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
@@ -253,8 +253,10 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
   const pickerContainer = document.getElementById("pickerContainer");
   const emojiModal = document.getElementById("emojiModal");
 
-  const linkData = columnsData[columnIndex].links[linkIndex];
+  //const linkData = columnsData[columnIndex].links[linkIndex];
   console.log("linkData in open modal", linkData);
+
+  selectedEmoji.textContent = linkData.emoji;
 
   // Inizializza il picker e nascondilo
   const picker = new EmojiMart.Picker({
@@ -317,16 +319,21 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
   document.getElementById("saveButton").onclick = () => {
     //const linkData = columnsData[columnIndex].links[linkIndex];
     console.log("on save", linkData, columnIndex, linkIndex);
+
+    const iconValue = faviconOption.checked
+      ? "favicon"
+      : emojiOption.checked
+      ? "emoji"
+      : null;
+
+    linkData.icon = iconValue;
+
     const newLinkData = {
       emoji: linkData.emoji,
       text: titleInput.value,
       url: urlInput.value,
       imageUrl: linkData.imageUrl || null,
-      icon: faviconOption.checked
-        ? "favicon"
-        : emojiOption.checked
-        ? "emoji"
-        : null,
+      icon: iconValue,
     };
 
     console.log("newLinkData", newLinkData);
