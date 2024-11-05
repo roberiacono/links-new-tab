@@ -96,15 +96,13 @@ button.add-link {
 .link-anchor {
     display: flex; /* Use flexbox for the emoji and title */
     align-items: center; /* Center items vertically */
-    text-decoration: none; /* Remove underline from the link */
-    color: #007bff; /* Change link color */
     flex-grow: 1; /* Allow the link to take up available space */
+    font-size: 16px;
 }
 
 .link-item a {
     text-decoration: none;
     color: #0073e6;
-    font-size: 16px;
 }
 
 .link-item .emoji {
@@ -113,8 +111,6 @@ button.add-link {
 
 .link-text {
     flex-grow: 1; /* Allow the link to take up available space */
-    text-decoration: none; /* Remove underline from the link */
-    color: #007bff; /* Change link color */
 }
 
 .edit-icon,

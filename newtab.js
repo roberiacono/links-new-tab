@@ -162,13 +162,18 @@ function addLink(linksWrapper, linkData, columnIndex) {
   const linkItem = document.createElement("div");
   linkItem.className = "link-item";
 
-  // Create the link as an <a> element
-  const linkAnchor = document.createElement("a");
-  linkAnchor.href = linkData.url;
-  linkAnchor.target = "_blank";
-  linkAnchor.className = "link-anchor"; // New class for the anchor
-  linkAnchor.style.display = "flex"; // Use flex for the emoji and text alignment
-  linkAnchor.style.alignItems = "center"; // Center items vertically
+  let linkAnchor = null;
+
+  if (linkData.url) {
+    // Create the link as an <a> element
+    linkAnchor = document.createElement("a");
+    linkAnchor.href = linkData.url;
+    linkAnchor.target = "_blank";
+    linkAnchor.className = "link-anchor"; // New class for the anchor
+  } else {
+    linkAnchor = document.createElement("div");
+    linkAnchor.className = "link-anchor"; // New class for the anchor
+  }
 
   // Emoji as a div
   const emojiDiv = document.createElement("div");
