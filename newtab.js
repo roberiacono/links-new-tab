@@ -171,7 +171,7 @@ function addLink(linksWrapper, linkData, columnIndex) {
     const linkIndex = Array.from(
       linksWrapper.getElementsByClassName("link-item")
     ).indexOf(linkItem);
-    openEditModal(columnIndex, linkIndex, linksWrapper);
+    openEditModal(linkData, columnIndex, linkIndex, linksWrapper);
   };
   linkItem.appendChild(editIcon);
 
@@ -203,7 +203,7 @@ function saveColumns() {
 }
 
 // Function to open the edit modal
-function openEditModal(columnIndex, linkIndex, linksWrapper) {
+function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
   const urlInput = document.getElementById("url");
   const titleInput = document.getElementById("title");
@@ -213,7 +213,7 @@ function openEditModal(columnIndex, linkIndex, linksWrapper) {
   const emojiOption = document.getElementById("emojiOption");
   const emptyOption = document.getElementById("emptyOption");
 
-  const linkData = columnsData[columnIndex].links[linkIndex];
+  //const linkData = columnsData[columnIndex].links[linkIndex];
   console.log("linkData in open modal", linkData);
 
   // Populate the inputs with current data
@@ -245,13 +245,13 @@ function openEditModal(columnIndex, linkIndex, linksWrapper) {
 
   // Save button event listener
   document.getElementById("saveButton").onclick = () => {
-    const linkData = columnsData[columnIndex].links[linkIndex];
+    //const linkData = columnsData[columnIndex].links[linkIndex];
     console.log("on save", linkData, columnIndex, linkIndex);
     const newLinkData = {
       emoji: emojiSelect.value,
       text: titleInput.value,
       url: urlInput.value,
-      imageUrl: linkData.imageUrl,
+      imageUrl: linkData.imageUrl || null,
       icon: faviconOption.checked
         ? "favicon"
         : emojiOption.checked

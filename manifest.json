@@ -10,7 +10,7 @@
   "permissions": ["storage"],
   "web_accessible_resources": [
     {
-        "resources": ["images/*"],
+        "resources": ["assets/images/*"],
         "matches": ["<all_urls>"]
     }
 ]
