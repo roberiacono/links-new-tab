@@ -347,6 +347,20 @@ function openEditModal(linkData2, columnIndex, linkIndex, linksWrapper) {
 
   // Close button event listener
   document.getElementById("closeButton").onclick = closeEditModal;
+
+  // Event listener per chiudere il modal al clic fuori dal contenuto
+  editModal.addEventListener("click", (event) => {
+    const modalContent = document.querySelector(".modal-content");
+    /* console.log(
+      "event.target",
+      event.target,
+      modalContent.contains(event.target)
+    ); */
+    if (!modalContent.contains(event.target)) {
+      // Controlla se il clic è fuori dal contenuto
+      closeEditModal();
+    }
+  });
 }
 
 // Funzione per aggiornare l'interfaccia di un link esistente
