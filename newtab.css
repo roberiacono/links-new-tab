@@ -237,10 +237,8 @@ button svg {
 
 .radio-group {
     display: flex;
-    
-    justify-content: space-between;
     margin-top: 10px;
-    gap: 10px;
+    gap: 30px;
   }
   .radio-group label {
     display: flex;

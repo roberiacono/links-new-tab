@@ -129,7 +129,7 @@ function addColumn(
   addLinkButton.innerHTML = plusIconSVG + "Aggiungi Link";
   addLinkButton.onclick = () =>
     openEditModal(
-      { emoji: "", text: "", url: "" },
+      { emoji: "😄", text: "", url: "" },
       columnIndex,
       null,
       linksWrapper
