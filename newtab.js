@@ -1,4 +1,23 @@
 const columnsContainer = document.getElementById("columns-container");
+
+const sortableColumns = new Sortable(columnsContainer, {
+  animation: 150,
+  onEnd: (event) => {
+    // Aggiornare l'ordine delle colonne
+    console.log("Columns reordered:", event);
+    // Ottieni l'indice della colonna spostata
+    const movedColumnIndex = event.oldIndex;
+    const newColumnIndex = event.newIndex;
+
+    // Aggiorna columnsData
+    const movedColumn = columnsData.splice(movedColumnIndex, 1)[0]; // Rimuovi la colonna da movedColumnIndex
+    columnsData.splice(newColumnIndex, 0, movedColumn); // Inserisci la colonna alla nuova posizione
+
+    // Salva i dati aggiornati
+    saveColumns();
+  },
+});
+
 const addColumnButton = document.getElementById("addColumnButton");
 
 const editIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -123,6 +142,20 @@ function addColumn(
     links: links,
     title: title,
   };
+
+  // Initialize Sortable on linksWrapper
+  Sortable.create(linksWrapper, {
+    animation: 150,
+    onEnd: function (evt) {
+      // Update your columnsData when a link is moved
+      const movedLink = columnsData[columnIndex].links.splice(
+        evt.oldIndex,
+        1
+      )[0];
+      columnsData[columnIndex].links.splice(evt.newIndex, 0, movedLink);
+      saveColumns(); // Save the updated columnsData
+    },
+  });
 }
 
 function addLink(linksWrapper, linkData, columnIndex) {
