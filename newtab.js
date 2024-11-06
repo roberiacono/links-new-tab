@@ -227,8 +227,8 @@ function addLink(linksWrapper, linkData, columnIndex) {
 }
 
 function saveColumns() {
-  // Salva columnsData come stringa JSON in chrome.storage.sync
-  chrome.storage.sync.set({ columns: JSON.stringify(columnsData) }, () => {
+  // Salva columnsData come stringa JSON in chrome.storage.local
+  chrome.storage.local.set({ columns: JSON.stringify(columnsData) }, () => {
     console.log("Data saved successfully!");
     console.log("columnsData", columnsData);
   });
@@ -293,6 +293,12 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   faviconPreview.src = linkData.imageUrl
     ? linkData.imageUrl
     : chrome.runtime.getURL("assets/images/favicon-empty.png");
+
+  // Metti il focus nel campo URL se è un nuovo link
+  console.log("linkIndex", linkIndex);
+  if (!linkIndex) {
+    setTimeout(() => urlInput.focus(), 0);
+  }
 
   // Fetch favicon when URL is updated
   urlInput.addEventListener("change", () => {
@@ -442,8 +448,8 @@ async function loadDefaultData() {
 }
 
 function loadColumns() {
-  //chrome.storage.sync.clear();
-  chrome.storage.sync.get(["columns", "alreadyInstalled"], async (data) => {
+  //chrome.storage.local.clear();
+  chrome.storage.local.get(["columns", "alreadyInstalled"], async (data) => {
     if (!data.alreadyInstalled) {
       // Prima installazione: carica i dati predefiniti
 
@@ -453,7 +459,7 @@ function loadColumns() {
         console.log("first time defaultData", defaultData);
 
         columnsData = defaultData.columns;
-        chrome.storage.sync.set({
+        chrome.storage.local.set({
           columns: JSON.stringify(columnsData),
           alreadyInstalled: true,
         });

@@ -1,28 +1,705 @@
 {
     "columns": [
-      {
-        "title": "Sample Column",
-        "links": [
-          {
-            "emoji": "🔗",
-            "icon": "emoji",
-            "text": "OpenAI",
-            "url": "https://www.openai.com"
-          },
-          {
-            "emoji": "📘",
-            "icon": "emoji",
-            "text": "Documentation",
-            "url": "https://docs.openai.com"
-          },
-          {
-            "emoji": "🌐",
-            "icon": "emoji",
-            "text": "Google",
-            "url": "https://www.google.com"
-          }
-        ]
-      }
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "ChatGPT",
+                    "url": "https://chatgpt.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google",
+                    "url": "https://www.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Gmail",
+                    "url": "https://mail.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://mail.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Notion",
+                    "url": "https://www.notion.so/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.notion.so",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Amazon",
+                    "url": "https://www.amazon.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=www.amazon.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Calendar",
+                    "url": "https://calendar.google.com/calendar/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://calendar.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "YouTube",
+                    "url": "http://www.youtube.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=http://www.youtube.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Everyday"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Notion",
+                    "url": "https://www.notion.so/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.notion.so",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google Sheet",
+                    "url": "https://docs.google.com/spreadsheets/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://docs.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "GitHub",
+                    "url": "https://github.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://github.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Slack",
+                    "url": "https://slack.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://slack.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Jira",
+                    "url": "https://www.atlassian.com/jira",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.atlassian.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Loom",
+                    "url": "https://www.loom.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.loom.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Intercom",
+                    "url": "https://www.intercom.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.intercom.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Trello",
+                    "url": "https://trello.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://trello.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Zapier",
+                    "url": "https://zapier.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://zapier.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "HubSpot",
+                    "url": "https://www.hubspot.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.hubspot.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Twilio",
+                    "url": "https://www.twilio.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.twilio.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "AirTable",
+                    "url": "https://www.airtable.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.airtable.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Zoom",
+                    "url": "https://www.zoom.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.zoom.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Veed",
+                    "url": "https://www.veed.io/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.veed.io",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Calendly",
+                    "url": "https://calendly.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://calendly.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Grammarly",
+                    "url": "https://www.grammarly.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.grammarly.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Ghostery",
+                    "url": "https://www.ghostery.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.ghostery.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Work & Productivity"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Vercel",
+                    "url": "https://vercel.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://vercel.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Amazon AWS",
+                    "url": "https://aws.amazon.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://aws.amazon.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google Cloud",
+                    "url": "https://cloud.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://cloud.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "GitHub",
+                    "url": "https://github.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://github.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Supabase",
+                    "url": "https://supabase.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://supabase.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "MongoDB",
+                    "url": "https://www.mongodb.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.mongodb.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Firebase",
+                    "url": "https://firebase.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://firebase.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Next.js",
+                    "url": "https://nextjs.org/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://nextjs.org",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Tailwind CSS",
+                    "url": "https://tailwindcss.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://tailwindcss.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Cursor",
+                    "url": "https://www.cursor.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.cursor.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Framer",
+                    "url": "https://www.framer.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.framer.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Resend",
+                    "url": "https://resend.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://resend.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "CloudFlare",
+                    "url": "https://www.cloudflare.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.cloudflare.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Apple Developer",
+                    "url": "https://developer.apple.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://developer.apple.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Android Developer",
+                    "url": "https://developer.android.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://developer.android.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Chrome Developer",
+                    "url": "https://developer.chrome.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://developer.chrome.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "React Native",
+                    "url": "https://reactnative.dev/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://reactnative.dev",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "ShipFast",
+                    "url": "https://shipfa.st/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://shipfa.st",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Bubble",
+                    "url": "https://bubble.io/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://bubble.io",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Development"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Canva",
+                    "url": "https://canva.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://canva.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Photopea",
+                    "url": "https://www.photopea.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.photopea.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Figma",
+                    "url": "https://www.figma.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.figma.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Tailwind CSS",
+                    "url": "https://tailwindcss.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://tailwindcss.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "shadcn/ui",
+                    "url": "https://ui.shadcn.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://ui.shadcn.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "DaisyUI",
+                    "url": "https://daisyui.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://daisyui.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Remove Bg",
+                    "url": "https://www.remove.bg/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.remove.bg",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Pexels",
+                    "url": "https://www.pexels.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.pexels.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Hero Icons",
+                    "url": "https://heroicons.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://heroicons.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Lucide Icons",
+                    "url": "https://lucide.dev/icons/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://lucide.dev",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "GetEmoji",
+                    "url": "https://getemoji.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://getemoji.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "ThemeForest",
+                    "url": "https://themeforest.net/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://themeforest.net",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Design"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Stripe",
+                    "url": "https://stripe.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://stripe.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "PayPal",
+                    "url": "https://www.paypal.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.paypal.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Gusto",
+                    "url": "http://www.gusto.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=http://www.gusto.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "QuickBooks",
+                    "url": "https://quickbooks.intuit.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://quickbooks.intuit.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Finance"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Twitter",
+                    "url": "https://x.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://x.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Linkedin",
+                    "url": "https://www.linkedin.com/feed/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.linkedin.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "YouTube",
+                    "url": "https://www.youtube.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.youtube.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Meta",
+                    "url": "https://www.facebook.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.facebook.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Instagram",
+                    "url": "https://www.instagram.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.instagram.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "TikTok",
+                    "url": "https://www.tiktok.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.tiktok.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Discord",
+                    "url": "https://discord.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://discord.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Telegram",
+                    "url": "https://web.telegram.org/k/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://web.telegram.org",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "WhatsApp",
+                    "url": "https://web.whatsapp.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://web.whatsapp.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Reddit",
+                    "url": "https://reddit.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://reddit.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Social & Community"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Resend",
+                    "url": "https://resend.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://resend.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "ClickUp",
+                    "url": "http://clickup.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=http://clickup.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Twilio",
+                    "url": "https://www.twilio.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.twilio.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Tally",
+                    "url": "https://tally.so/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://tally.so",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google Drive",
+                    "url": "https://drive.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://drive.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Senja",
+                    "url": "https://senja.io/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://senja.io",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Canny",
+                    "url": "https://canny.io/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://canny.io",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Crisp",
+                    "url": "https://crisp.chat/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://crisp.chat",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Hotjar",
+                    "url": "https://www.hotjar.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.hotjar.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "AirTable",
+                    "url": "https://www.airtable.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.airtable.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "GumRoad",
+                    "url": "https://gumroad.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://gumroad.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Marketing & Sales"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "ChatGPT",
+                    "url": "https://chatgpt.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://chatgpt.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Claude",
+                    "url": "https://claude.ai/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://claude.ai",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Open AI",
+                    "url": "https://openai.com/api",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://openai.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Gemini",
+                    "url": "https://gemini.google.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://gemini.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Perplexity",
+                    "url": "https://www.perplexity.ai/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.perplexity.ai",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Midjourney",
+                    "url": "https://www.midjourney.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.midjourney.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "replicate",
+                    "url": "https://replicate.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://replicate.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Fathom",
+                    "url": "https://fathom.video/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://fathom.video",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "AI"
+        },
+        {
+            "links": [],
+            "title": "Travel"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Google Maps",
+                    "url": "https://www.google.com/maps",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Booking",
+                    "url": "https://www.booking.com",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.booking.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "AirBnB",
+                    "url": "https://www.airbnb.com",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.airbnb.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google Flights",
+                    "url": "https://www.google.com/travel/flights",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.google.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Uber",
+                    "url": "http://uber.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=http://uber.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Travel"
+        }
     ]
   }
   
