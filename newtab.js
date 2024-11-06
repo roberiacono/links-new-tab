@@ -109,7 +109,7 @@ function addColumn(
 
   const addLinkButton = document.createElement("button");
   addLinkButton.className = "add-link";
-  addLinkButton.innerHTML = plusIconSVG + "Aggiungi Link";
+  addLinkButton.innerHTML = plusIconSVG + "Add Link";
   addLinkButton.onclick = () => {
     openEditModal(
       { emoji: "😄", text: "", url: "" },
@@ -149,14 +149,14 @@ function addLink(linksWrapper, linkData, columnIndex) {
 
   let linkAnchor = null;
 
+  linkAnchor = document.createElement("a");
+  linkAnchor.target = "_blank";
+
   if (linkData.url) {
     // Create the link as an <a> element
-    linkAnchor = document.createElement("a");
     linkAnchor.href = linkData.url;
-    linkAnchor.target = "_blank";
     linkAnchor.className = "link-anchor"; // New class for the anchor
   } else {
-    linkAnchor = document.createElement("div");
     linkAnchor.className = "link-anchor not-linked"; // New class for the anchor
   }
 
@@ -267,7 +267,7 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   });
 
   // Chiude il picker se si clicca fuori da esso
-  document.addEventListener("click", (event) => {
+  document.addEventListener("mousedown", (event) => {
     if (
       !pickerContainer.contains(event.target) &&
       !emojiOption.contains(event.target)
@@ -291,7 +291,7 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
     const url = urlInput.value.trim();
     if (url) {
       const faviconUrl =
-        "https://www.google.com/s2/favicons?domain=" + new URL(url).hostname;
+        "https://www.google.com/s2/favicons?domain=" + new URL(url).origin;
       faviconPreview.src = faviconUrl;
       faviconOption.checked = true; // Default to favicon on URL change
       linkData.imageUrl = faviconUrl; // Store favicon URL
@@ -323,13 +323,14 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
       : null;
 
     linkData.icon = iconValue;
+    linkData.url = urlInput.value || "#";
 
     const newLinkData = {
       emoji: linkData.emoji,
       text: titleInput.value,
-      url: urlInput.value,
+      url: linkData.url,
       imageUrl: linkData.imageUrl || null,
-      icon: iconValue,
+      icon: linkData.icon,
     };
 
     console.log("newLinkData", newLinkData);
@@ -352,13 +353,8 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   document.getElementById("closeButton").onclick = closeEditModal;
 
   // Event listener per chiudere il modal al clic fuori dal contenuto
-  editModal.addEventListener("click", (event) => {
+  editModal.addEventListener("mousedown", (event) => {
     const modalContent = document.querySelector(".modal-content");
-    /* console.log(
-      "event.target",
-      event.target,
-      modalContent.contains(event.target)
-    ); */
     if (!modalContent.contains(event.target)) {
       // Controlla se il clic è fuori dal contenuto
       closeEditModal();
