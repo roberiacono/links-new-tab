@@ -3,21 +3,42 @@
         {
             "links": [
                 {
-                    "emoji": "😄",
+                    "emoji": "💪",
+                    "text": "Habit Tracker",
+                    "url": "#",
+                    "imageUrl": null,
+                    "icon": "emoji"
+                },
+                {
+                    "emoji": "💸",
+                    "text": "Finance Tracker",
+                    "url": "#",
+                    "imageUrl": null,
+                    "icon": "emoji"
+                },
+                {
+                    "emoji": "🎯",
+                    "text": "Weekly Goals",
+                    "url": "#",
+                    "imageUrl": null,
+                    "icon": "emoji"
+                },
+                {
+                    "emoji": "🔗",
                     "text": "ChatGPT",
                     "url": "https://chatgpt.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=chatgpt.com",
                     "icon": "favicon"
                 },
                 {
-                    "emoji": "😄",
+                    "emoji": "🌐",
                     "text": "Google",
                     "url": "https://www.google.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.google.com",
                     "icon": "favicon"
                 },
                 {
-                    "emoji": "😄",
+                    "emoji": "🎯",
                     "text": "Gmail",
                     "url": "https://mail.google.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=https://mail.google.com",
@@ -31,7 +52,7 @@
                     "icon": "favicon"
                 },
                 {
-                    "emoji": "😄",
+                    "emoji": "📘",
                     "text": "Amazon",
                     "url": "https://www.amazon.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=www.amazon.com",
@@ -655,10 +676,6 @@
                 }
             ],
             "title": "AI"
-        },
-        {
-            "links": [],
-            "title": "Travel"
         },
         {
             "links": [

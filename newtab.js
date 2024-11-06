@@ -295,7 +295,6 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
     : chrome.runtime.getURL("assets/images/favicon-empty.png");
 
   // Metti il focus nel campo URL se è un nuovo link
-  console.log("linkIndex", linkIndex);
   if (!linkIndex) {
     setTimeout(() => urlInput.focus(), 0);
   }
@@ -340,7 +339,7 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
     linkData.url = urlInput.value || "#";
 
     const newLinkData = {
-      emoji: linkData.emoji,
+      emoji: selectedEmoji.textContent,
       text: titleInput.value,
       url: linkData.url,
       imageUrl: linkData.imageUrl || null,

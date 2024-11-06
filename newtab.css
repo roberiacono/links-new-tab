@@ -89,7 +89,7 @@ button.add-link:hover {
 
 #columns-container {
     display: grid;                     /* Utilizza Grid Layout */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adatta automaticamente il numero di colonne */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adatta automaticamente il numero di colonne */
     gap: 10px;                         /* Spazio tra le colonne */                   /* Padding attorno al contenitore principale */
 }
 
@@ -176,6 +176,7 @@ button.add-link:hover {
 
 .link-item .emoji {
     margin-right: 8px;
+    font-size: 14px;
 }
 
 .link-text {
