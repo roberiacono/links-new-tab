@@ -77,6 +77,14 @@ function addColumn(
     saveColumns(); // Salva i dati aggiornati
   };
 
+  titleInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Previene il comportamento predefinito di "Enter"
+      saveColumns(); // Chiama la funzione per salvare le colonne
+      titleInput.blur(); // Rimuove il focus dal campo, se desiderato
+    }
+  });
+
   header.appendChild(titleInput); // Aggiungi il titolo al contenitore
 
   // Focus sull'input del titolo subito dopo aver aggiunto la colonna
