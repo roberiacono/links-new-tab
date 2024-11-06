@@ -1,0 +1,38 @@
+{
+    "appDescription": {
+        "message": "Organizza i tuoi link preferiti in colonne personalizzabili con drag-and-drop, emoji e favicon per un facile accesso e gestione.",
+        "description": "La descrizione dell'estensione."
+    },
+    "addBoxButtonText": {
+        "message": "Aggiungi Box",
+        "description": "Testo per pulsante Aggiungi un nuovo Box"
+    },
+    "undoButtonText": {
+        "message": "Annulla",
+        "description": "Text for Undo Button"
+    },
+    "addNewLinkModalTitleText": {
+        "message": "Aggiungi Nuovo Link"
+    },
+    "editLinkModalTitleText": {
+        "message": "Modifica Link"
+    },
+    "labelTitle": {
+        "message": "Titolo"
+    },
+    "labelIcon": {
+        "message": "Icona"
+    },
+    "noneRadioText": {
+        "message": "Nessuno"
+    },
+    "saveButton": {
+        "message": "Salva"
+    },
+    "closeButton": {
+        "message": "Chiudi"
+    },
+    "addLinkButtonText": {
+        "message": "Aggiungi Link"
+    }
+}

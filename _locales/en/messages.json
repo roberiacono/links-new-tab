@@ -1,0 +1,40 @@
+{
+    "appDescription": {
+        "message": "Organize your favorite links in customizable columns with drag-and-drop, emojis, and favicons for easy access and management.",
+        "description": "The description of the extension."
+    },
+    "addBoxButtonText": {
+        "message": "Add Box",
+        "description": "Text for Add Box Button"
+    },
+    "undoButtonText": {
+        "message": "Undo",
+        "description": "Text for Undo Button"
+    },
+    "addNewLinkModalTitleText": {
+        "message": "Add New Link",
+        "description": "Text for Add New link in Modal Title"
+    },
+    "editLinkModalTitleText": {
+        "message": "Edit Link",
+        "description": "Text for edit link in Modal Title"
+    },
+    "labelTitle": {
+        "message": "Title"
+    },
+    "labelIcon": {
+        "message": "Icon"
+    },
+    "noneRadioText": {
+        "message": "None"
+    },
+    "saveButton": {
+        "message": "Save"
+    },
+    "closeButton": {
+        "message": "Close"
+    },
+    "addLinkButtonText": {
+        "message": "Add Link"
+    }
+}

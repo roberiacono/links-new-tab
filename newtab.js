@@ -1,10 +1,11 @@
+const showDebug = true;
+
 const columnsContainer = document.getElementById("columns-container");
 
+// Aggiornare l'ordine delle colonne
 const sortableColumns = new Sortable(columnsContainer, {
   animation: 150,
   onEnd: (event) => {
-    // Aggiornare l'ordine delle colonne
-    console.log("Columns reordered:", event);
     // Ottieni l'indice della colonna spostata
     const movedColumnIndex = event.oldIndex;
     const newColumnIndex = event.newIndex;
@@ -76,7 +77,27 @@ const undoButton = document.getElementById("undoButton");
 let defaultData;
 
 // Carica le colonne salvate al caricamento della pagina
-document.addEventListener("DOMContentLoaded", loadColumns);
+document.addEventListener("DOMContentLoaded", function () {
+  localizeText();
+  loadColumns();
+});
+
+function localizeText() {
+  document.getElementById("addBoxButtonText").textContent =
+    chrome.i18n.getMessage("addBoxButtonText");
+  document.getElementById("undoButtonText").textContent =
+    chrome.i18n.getMessage("undoButtonText");
+  document.getElementById("noneRadioText").textContent =
+    chrome.i18n.getMessage("noneRadioText");
+  document.getElementById("saveButton").textContent =
+    chrome.i18n.getMessage("saveButton");
+  document.getElementById("closeButton").textContent =
+    chrome.i18n.getMessage("closeButton");
+  document.getElementById("labelTitle").textContent =
+    chrome.i18n.getMessage("labelTitle");
+  document.getElementById("labelIcon").textContent =
+    chrome.i18n.getMessage("labelIcon");
+}
 
 // Aggiunge una nuova colonna quando si clicca sul pulsante "Aggiungi Colonna"
 addColumnButton.addEventListener("click", () => {
@@ -135,6 +156,8 @@ function addColumn(
     columnsData.splice(columnIndex, 1); // Rimuovi la colonna dall'array
     column.remove(); // Rimuovi la colonna dall'interfaccia utente
     saveColumns(); // Salva le modifiche alle colonne
+    // Aggiorna gli indici dei pulsanti "Aggiungi Link"
+    updateAddLinkButtons();
   };
 
   header.appendChild(deleteColumnIcon); // Aggiungi l'icona di eliminazione al contenitore
@@ -150,7 +173,8 @@ function addColumn(
 
   const addLinkButton = document.createElement("button");
   addLinkButton.className = "add-link";
-  addLinkButton.innerHTML = plusIconSVG + "Add Link";
+  addLinkButton.innerHTML =
+    plusIconSVG + chrome.i18n.getMessage("addLinkButtonText");
   addLinkButton.onclick = () => {
     openEditModal(
       { emoji: "😄", text: "", url: "" },
@@ -168,20 +192,6 @@ function addColumn(
     title: title,
   };
 
-  /*  // Initialize Sortable on linksWrapper
-  Sortable.create(linksWrapper, {
-    animation: 150,
-    onEnd: function (evt) {
-      saveState();
-      // Update your columnsData when a link is moved
-      const movedLink = columnsData[columnIndex].links.splice(
-        evt.oldIndex,
-        1
-      )[0];
-      columnsData[columnIndex].links.splice(evt.newIndex, 0, movedLink);
-      saveColumns(); // Save the updated columnsData
-    },
-  }); */
   initializeLinkSorting();
 }
 
@@ -260,14 +270,6 @@ function addLink(linksWrapper, linkData, columnIndex) {
   linksWrapper.appendChild(linkItem);
 }
 
-function saveColumns() {
-  // Salva columnsData come stringa JSON in chrome.storage.local
-  chrome.storage.local.set({ columns: JSON.stringify(columnsData) }, () => {
-    console.log("Data saved successfully!");
-    console.log("columnsData", columnsData);
-  });
-}
-
 // Function to open the edit modal
 function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const editModal = document.getElementById("editModal");
@@ -282,7 +284,15 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   const emojiModal = document.getElementById("emojiModal");
 
   //const linkData = columnsData[columnIndex].links[linkIndex];
-  console.log("linkData in open modal", linkData);
+  if (showDebug) {
+    console.log("linkData in open modal", linkData, columnIndex, linkIndex);
+  }
+
+  const modalTitle = document.querySelector(".modal-title");
+  modalTitle.textContent =
+    linkIndex === null
+      ? chrome.i18n.getMessage("addNewLinkModalTitleText")
+      : chrome.i18n.getMessage("editLinkModalTitleText");
 
   selectedEmoji.textContent = linkData.emoji;
 
@@ -350,7 +360,6 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
 
   // Event listener per il salvataggio con "Invio"
   document.onkeydown = (event) => {
-    console.log("editModal.onkeydown", event);
     if (event.key === "Enter") {
       event.preventDefault(); // Previene il comportamento predefinito del tasto Invio
       document.getElementById("saveButton").click(); // Esegue il salvataggio
@@ -361,7 +370,9 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   document.getElementById("saveButton").onclick = () => {
     saveState();
     //const linkData = columnsData[columnIndex].links[linkIndex];
-    console.log("on save", linkData, columnIndex, linkIndex);
+    if (showDebug) {
+      console.log("on save", linkData, columnIndex, linkIndex);
+    }
 
     const iconValue = faviconOption.checked
       ? "favicon"
@@ -380,7 +391,9 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
       icon: linkData.icon,
     };
 
-    console.log("newLinkData", newLinkData);
+    if (showDebug) {
+      console.log("newLinkData", newLinkData);
+    }
 
     if (linkIndex === null) {
       // Se linkIndex è null, aggiungiamo un nuovo link
@@ -409,9 +422,21 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   });
 }
 
+function saveColumns() {
+  // Salva columnsData come stringa JSON in chrome.storage.local
+  chrome.storage.local.set({ columns: JSON.stringify(columnsData) }, () => {
+    if (showDebug) {
+      console.log("Data saved successfully!");
+      console.log("columnsData", columnsData);
+    }
+  });
+}
+
 // Funzione per aggiornare l'interfaccia di un link esistente
 function updateLinkDisplay(linksWrapper, linkData, linkIndex) {
-  console.log("updateLinkDisplay", linkData, linkIndex);
+  if (showDebug) {
+    console.log("updateLinkDisplay", linkData, linkIndex);
+  }
   const linkItems = linksWrapper.getElementsByClassName("link-item");
   const linkItem = linkItems[linkIndex];
 
@@ -441,6 +466,29 @@ function closeEditModal() {
   document.onkeydown = null; // Rimuove l'event listener per "Invio"
 }
 
+// Crea una funzione updateAddLinkButtons che aggiorna columnIndex in addLinkButton.onclick per ciascuna colonna, in base alla posizione aggiornata di ogni .column dopo una modifica.
+function updateAddLinkButtons() {
+  // Seleziona tutte le colonne attualmente presenti
+  const columns = Array.from(document.querySelectorAll(".column"));
+
+  columns.forEach((column, newIndex) => {
+    const addLinkButton = column.querySelector(".add-link");
+
+    // Assicurati che addLinkButton esista per la colonna
+    if (addLinkButton) {
+      // Aggiorna l'handler del pulsante per il nuovo indice
+      addLinkButton.onclick = () => {
+        openEditModal(
+          { emoji: "😄", text: "", url: "" },
+          newIndex, // Usa il nuovo indice aggiornato
+          null,
+          column.querySelector(".links-wrapper")
+        );
+      };
+    }
+  });
+}
+
 function saveState() {
   if (stateHistory.length >= MAX_HISTORY) {
     stateHistory.shift(); // Rimuove il più vecchio se si supera il limite
@@ -448,7 +496,6 @@ function saveState() {
   // Salva una copia profonda dell'attuale columnsData
   stateHistory.push(JSON.parse(JSON.stringify(columnsData)));
   undoButton.disabled = false; // Abilita il pulsante "Annulla" ogni volta che si salva uno stato
-  console.log("stateHistory", stateHistory);
 }
 
 function undo() {
@@ -456,7 +503,6 @@ function undo() {
     alert("Non ci sono modifiche da annullare.");
     return;
   }
-  console.log("undo");
   columnsContainer.innerHTML = "";
   columnsData = stateHistory.pop(); // Ripristina l'ultimo stato
   saveColumns(); // Salva lo stato ripristinato
@@ -489,7 +535,9 @@ function loadColumns() {
       // Carica le colonne al caricamento della pagina
       try {
         defaultData = await loadDefaultData();
-        console.log("first time defaultData", defaultData);
+        if (showDebug) {
+          console.log("first time defaultData", defaultData);
+        }
 
         columnsData = defaultData.columns;
         chrome.storage.local.set({
@@ -506,7 +554,9 @@ function loadColumns() {
       columnsData = JSON.parse(data.columns);
     }
 
-    console.log("columnsData", columnsData);
+    if (showDebug) {
+      console.log("columnsData", columnsData);
+    }
     // Load columns to the UI
     columnsData.forEach((columnData, index) => {
       addColumn(columnData.title, columnData.links, index);
