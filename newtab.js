@@ -18,6 +18,39 @@ const sortableColumns = new Sortable(columnsContainer, {
   },
 });
 
+// Aggiungi drag-and-drop ai link di ogni colonna
+function initializeLinkSorting() {
+  // Inizializza il drag-and-drop per ogni links-wrapper
+  document
+    .querySelectorAll(".links-wrapper")
+    .forEach((wrapper, columnIndex) => {
+      Sortable.create(wrapper, {
+        group: "shared-links", // Stesso gruppo per permettere spostamento tra colonne
+        animation: 150,
+        handle: ".link-item", // Permette di draggare direttamente il link
+        draggable: ".link-item",
+        onEnd: function (event) {
+          const oldIndex = event.oldIndex;
+          const newIndex = event.newIndex;
+          const fromColumnIndex = Array.from(
+            document.querySelectorAll(".links-wrapper")
+          ).indexOf(event.from);
+          const toColumnIndex = Array.from(
+            document.querySelectorAll(".links-wrapper")
+          ).indexOf(event.to);
+
+          // Aggiorna l'ordine di columnsData in base al movimento
+          const [movedLink] = columnsData[fromColumnIndex].links.splice(
+            oldIndex,
+            1
+          );
+          columnsData[toColumnIndex].links.splice(newIndex, 0, movedLink);
+          saveColumns(); // Salva l'ordine aggiornato
+        },
+      });
+    });
+}
+
 const addColumnButton = document.getElementById("addColumnButton");
 
 const editIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -135,7 +168,7 @@ function addColumn(
     title: title,
   };
 
-  // Initialize Sortable on linksWrapper
+  /*  // Initialize Sortable on linksWrapper
   Sortable.create(linksWrapper, {
     animation: 150,
     onEnd: function (evt) {
@@ -148,7 +181,7 @@ function addColumn(
       columnsData[columnIndex].links.splice(evt.newIndex, 0, movedLink);
       saveColumns(); // Save the updated columnsData
     },
-  });
+  }); */
 }
 
 function addLink(linksWrapper, linkData, columnIndex) {
@@ -477,5 +510,8 @@ function loadColumns() {
     columnsData.forEach((columnData, index) => {
       addColumn(columnData.title, columnData.links, index);
     });
+
+    // Inizializza il drag-and-drop sui link
+    initializeLinkSorting();
   });
 }

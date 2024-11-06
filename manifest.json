@@ -1,7 +1,7 @@
 
 {
   "manifest_version": 3,
-  "name": "Link Organizer New Tab",
+  "name": "QuickLinks New Tab",
   "version": "0.0.1",
   "description": "Una nuova scheda personalizzata con link organizzati in colonne e emoji.",
   "chrome_url_overrides": {

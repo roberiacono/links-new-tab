@@ -90,7 +90,8 @@ button.add-link:hover {
 #columns-container {
     display: grid;                     /* Utilizza Grid Layout */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adatta automaticamente il numero di colonne */
-    gap: 10px;                         /* Spazio tra le colonne */                   /* Padding attorno al contenitore principale */
+    gap: 10px;                         /* Spazio tra le colonne */   
+    align-items: flex-start;
 }
 
 .column {
@@ -109,7 +110,7 @@ button.add-link:hover {
     justify-content: space-between; /* Spazio tra il titolo e l'icona */
     box-sizing: border-box; /* Include padding and border in element's total width */
     width: 100%;
-    padding: 10px 15px;
+    padding: 5px 15px;
     border-bottom: 1px solid #ecf0f1;
 }
 
@@ -146,7 +147,7 @@ button.add-link:hover {
     border-bottom: 1px solid #ecf0f1;
     background: #fefefe;
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
 }
 
