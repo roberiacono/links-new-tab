@@ -182,6 +182,7 @@ function addColumn(
       saveColumns(); // Save the updated columnsData
     },
   }); */
+  initializeLinkSorting();
 }
 
 function addLink(linksWrapper, linkData, columnIndex) {

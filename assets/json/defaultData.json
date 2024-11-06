@@ -195,6 +195,13 @@
                     "url": "https://www.ghostery.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.ghostery.com",
                     "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Toggl",
+                    "url": "https://toggl.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://toggl.com",
+                    "icon": "favicon"
                 }
             ],
             "title": "Work & Productivity"
@@ -422,6 +429,13 @@
                     "url": "https://themeforest.net/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=https://themeforest.net",
                     "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "unDraw",
+                    "url": "https://undraw.co/illustrations",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://undraw.co",
+                    "icon": "favicon"
                 }
             ],
             "title": "Design"
@@ -641,6 +655,13 @@
                 },
                 {
                     "emoji": "😄",
+                    "text": "test",
+                    "url": "#",
+                    "imageUrl": null,
+                    "icon": null
+                },
+                {
+                    "emoji": "😄",
                     "text": "Gemini",
                     "url": "https://gemini.google.com/",
                     "imageUrl": "https://www.google.com/s2/favicons?domain=https://gemini.google.com",
@@ -709,13 +730,149 @@
                 },
                 {
                     "emoji": "😄",
-                    "text": "Uber",
-                    "url": "http://uber.com/",
-                    "imageUrl": "https://www.google.com/s2/favicons?domain=http://uber.com",
+                    "text": "TripAdvisor",
+                    "url": "https://www.tripadvisor.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.tripadvisor.com",
                     "icon": "favicon"
                 }
             ],
             "title": "Travel"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "FreeCodeCamp",
+                    "url": "https://www.freecodecamp.org/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.freecodecamp.org",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Harvard CS50",
+                    "url": "https://www.youtube.com/watch?v=8mAITcNt710",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.youtube.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "TED",
+                    "url": "https://www.ted.com/talks",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.ted.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "WikiPedia",
+                    "url": "https://en.wikipedia.org/wiki/Main_Page",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://en.wikipedia.org",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Linkedin Learning",
+                    "url": "https://www.linkedin.com/learning/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.linkedin.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Google Grow",
+                    "url": "https://grow.google/intl/uk/courses-and-tools/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://grow.google",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Babbel",
+                    "url": "https:/babbel.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://babbel.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "MasterClass",
+                    "url": "https://www.masterclass.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.masterclass.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Coursera",
+                    "url": "https://www.coursera.org/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.coursera.org",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Udemy",
+                    "url": "https://www.udemy.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.udemy.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "TypingClub",
+                    "url": "https://www.typingclub.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.typingclub.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Learning"
+        },
+        {
+            "links": [
+                {
+                    "emoji": "😄",
+                    "text": "Product Hunt",
+                    "url": "https://www.producthunt.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.producthunt.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Calm",
+                    "url": "https://www.calm.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.calm.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Blinkist",
+                    "url": "https://www.blinkist.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.blinkist.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "AppSumo",
+                    "url": "https://appsumo.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://appsumo.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "National Geographic",
+                    "url": "https://www.nationalgeographic.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.nationalgeographic.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "Nomads",
+                    "url": "https://nomads.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://nomads.com",
+                    "icon": "favicon"
+                },
+                {
+                    "emoji": "😄",
+                    "text": "IndieHackers",
+                    "url": "https://www.indiehackers.com/",
+                    "imageUrl": "https://www.google.com/s2/favicons?domain=https://www.indiehackers.com",
+                    "icon": "favicon"
+                }
+            ],
+            "title": "Inspiration"
         }
     ]
   }
