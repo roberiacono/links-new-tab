@@ -9,9 +9,17 @@
 </head>
 <body>
     <div id="main-container">
-        <button id="addColumnButton" class="add-column"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg> Aggiungi Colonna</button>
+        <div id="controls">
+            <button id="addColumnButton" class="add-column"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"  stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg> Add Box
+            </button>
+            <button id="undoButton" disabled><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+              </svg>
+              Undo
+            </button>
+        </div>
         <div id="columns-container" class=""></div>
     </div>
 
@@ -23,11 +31,11 @@
             
             <div class="form-group">
                 <label for="url" class="form-label">URL:</label>
-                <input type="url" id="url" class="form-input" required>
+                <input type="url" id="url" class="form-input" placeholder="https://...">
             </div>
             <div class="form-group">
                 <label for="title" class="form-label">Title:</label>
-                <input type="text" id="title" class="form-input" required>
+                <input type="text" id="title" class="form-input">
             </div>
 
             <div class="form-group">

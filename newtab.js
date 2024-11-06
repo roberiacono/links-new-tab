@@ -36,6 +36,10 @@ const plusIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox
 
 let columnsData = []; // Will be populated in loadColumns()
 
+const stateHistory = []; // Stack per salvare gli stati
+const MAX_HISTORY = 10; // Limite massimo di stati salvati
+const undoButton = document.getElementById("undoButton");
+
 const defaultData = {
   columns: [
     {
@@ -43,16 +47,19 @@ const defaultData = {
       links: [
         {
           emoji: "🔗",
+          icon: "emoji",
           text: "OpenAI",
           url: "https://www.openai.com",
         },
         {
           emoji: "📘",
+          icon: "emoji",
           text: "Documentation",
           url: "https://docs.openai.com",
         },
         {
           emoji: "🌐",
+          icon: "emoji",
           text: "Google",
           url: "https://www.google.com",
         },
@@ -91,6 +98,7 @@ function addColumn(
 
   // Aggiungi un evento onchange per salvare il titolo quando cambia
   titleInput.onchange = () => {
+    saveState();
     columnsData[columnIndex].title = titleInput.value; // Aggiorna il titolo nella struttura dati
     saveColumns(); // Salva i dati aggiornati
   };
@@ -108,6 +116,7 @@ function addColumn(
 
   // Funzionalità di eliminazione della colonna
   deleteColumnIcon.onclick = () => {
+    saveState();
     columnsData.splice(columnIndex, 1); // Rimuovi la colonna dall'array
     column.remove(); // Rimuovi la colonna dall'interfaccia utente
     saveColumns(); // Salva le modifiche alle colonne
@@ -127,13 +136,14 @@ function addColumn(
   const addLinkButton = document.createElement("button");
   addLinkButton.className = "add-link";
   addLinkButton.innerHTML = plusIconSVG + "Aggiungi Link";
-  addLinkButton.onclick = () =>
+  addLinkButton.onclick = () => {
     openEditModal(
       { emoji: "😄", text: "", url: "" },
       columnIndex,
       null,
       linksWrapper
     );
+  };
   column.appendChild(addLinkButton);
 
   columnsContainer.appendChild(column);
@@ -147,6 +157,7 @@ function addColumn(
   Sortable.create(linksWrapper, {
     animation: 150,
     onEnd: function (evt) {
+      saveState();
       // Update your columnsData when a link is moved
       const movedLink = columnsData[columnIndex].links.splice(
         evt.oldIndex,
@@ -219,6 +230,7 @@ function addLink(linksWrapper, linkData, columnIndex) {
 
   // Funzionalità di eliminazione
   deleteIcon.onclick = () => {
+    saveState(); // Salva lo stato attuale
     const linkIndex = Array.from(
       linksWrapper.getElementsByClassName("link-item")
     ).indexOf(linkItem);
@@ -315,8 +327,18 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
   // Show the modal
   editModal.classList.remove("hidden");
 
+  // Event listener per il salvataggio con "Invio"
+  document.onkeydown = (event) => {
+    console.log("editModal.onkeydown", event);
+    if (event.key === "Enter") {
+      event.preventDefault(); // Previene il comportamento predefinito del tasto Invio
+      document.getElementById("saveButton").click(); // Esegue il salvataggio
+    }
+  };
+
   // Save button event listener
   document.getElementById("saveButton").onclick = () => {
+    saveState();
     //const linkData = columnsData[columnIndex].links[linkIndex];
     console.log("on save", linkData, columnIndex, linkIndex);
 
@@ -399,19 +421,50 @@ function updateLinkDisplay(linksWrapper, linkData, linkIndex) {
 function closeEditModal() {
   const editModal = document.getElementById("editModal");
   editModal.classList.add("hidden"); // Hide the modal
+  document.onkeydown = null; // Rimuove l'event listener per "Invio"
 }
+
+function saveState() {
+  if (stateHistory.length >= MAX_HISTORY) {
+    stateHistory.shift(); // Rimuove il più vecchio se si supera il limite
+  }
+  // Salva una copia profonda dell'attuale columnsData
+  stateHistory.push(JSON.parse(JSON.stringify(columnsData)));
+  undoButton.disabled = false; // Abilita il pulsante "Annulla" ogni volta che si salva uno stato
+  console.log("stateHistory", stateHistory);
+}
+
+function undo() {
+  if (stateHistory.length === 0) {
+    alert("Non ci sono modifiche da annullare.");
+    return;
+  }
+  console.log("undo");
+  columnsContainer.innerHTML = "";
+  columnsData = stateHistory.pop(); // Ripristina l'ultimo stato
+  saveColumns(); // Salva lo stato ripristinato
+  loadColumns(); // Ricarica l'interfaccia
+  undoButton.disabled = stateHistory.length === 0; // Disabilita il pulsante se non ci sono più stati
+}
+
+undoButton.addEventListener("click", undo);
 
 function loadColumns() {
   //chrome.storage.sync.clear();
-  chrome.storage.sync.get("columns", (data) => {
-    if (data.columns) {
-      columnsData = JSON.parse(data.columns); // Parse the JSON string
-    } else {
-      // Use default data if nothing is saved in storage
+  chrome.storage.sync.get(["columns", "alreadyInstalled"], (data) => {
+    if (!data.alreadyInstalled) {
+      // Prima installazione: carica i dati predefiniti
       columnsData = defaultData.columns;
-      // Save this default data to storage
-      chrome.storage.sync.set({ columns: JSON.stringify(columnsData) });
+      chrome.storage.sync.set({
+        columns: JSON.stringify(columnsData),
+        alreadyInstalled: true,
+      });
+      //alert("Benvenuto! È stato caricato un elenco di link predefiniti.");
+    } else if (data.columns) {
+      // Carica i dati salvati se esistono
+      columnsData = JSON.parse(data.columns);
     }
+
     console.log("columnsData", columnsData);
     // Load columns to the UI
     columnsData.forEach((columnData, index) => {

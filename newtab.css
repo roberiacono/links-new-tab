@@ -48,15 +48,44 @@ button.add-link:hover {
     color: inherit;
 }
 
+
+
+#controls {
+    display: flex;
+    gap: 10px; /* Spazio tra i pulsanti */
+    margin-bottom: 20px;
+}
+
+#addColumnButton {
+    font-size: 16px;
+}
+
+#undoButton {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border: 1px solid ;
+}
+
+#undoButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5; /* Per indicare visivamente il pulsante disabilitato */
+}
+
 #main-container {
     padding: 20px;
 }
 
-#addColumnButton {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
+
 
 #columns-container {
     display: grid;                     /* Utilizza Grid Layout */
