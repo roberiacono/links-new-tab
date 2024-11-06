@@ -2,7 +2,7 @@
 {
   "manifest_version": 3,
   "name": "Link Organizer New Tab",
-  "version": "1.0",
+  "version": "0.0.1",
   "description": "Una nuova scheda personalizzata con link organizzati in colonne e emoji.",
   "chrome_url_overrides": {
     "newtab": "newtab.html"
@@ -10,7 +10,7 @@
   "permissions": ["storage"],
   "web_accessible_resources": [
     {
-        "resources": ["assets/images/*", "assets/js/*"],
+        "resources": ["assets/images/*", "assets/js/*", "assets/json/*"],
         "matches": ["<all_urls>"]
     }
 ]

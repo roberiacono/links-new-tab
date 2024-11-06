@@ -1,0 +1,28 @@
+{
+    "columns": [
+      {
+        "title": "Sample Column",
+        "links": [
+          {
+            "emoji": "🔗",
+            "icon": "emoji",
+            "text": "OpenAI",
+            "url": "https://www.openai.com"
+          },
+          {
+            "emoji": "📘",
+            "icon": "emoji",
+            "text": "Documentation",
+            "url": "https://docs.openai.com"
+          },
+          {
+            "emoji": "🌐",
+            "icon": "emoji",
+            "text": "Google",
+            "url": "https://www.google.com"
+          }
+        ]
+      }
+    ]
+  }
+  

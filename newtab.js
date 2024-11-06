@@ -40,33 +40,7 @@ const stateHistory = []; // Stack per salvare gli stati
 const MAX_HISTORY = 10; // Limite massimo di stati salvati
 const undoButton = document.getElementById("undoButton");
 
-const defaultData = {
-  columns: [
-    {
-      title: "Sample Column",
-      links: [
-        {
-          emoji: "🔗",
-          icon: "emoji",
-          text: "OpenAI",
-          url: "https://www.openai.com",
-        },
-        {
-          emoji: "📘",
-          icon: "emoji",
-          text: "Documentation",
-          url: "https://docs.openai.com",
-        },
-        {
-          emoji: "🌐",
-          icon: "emoji",
-          text: "Google",
-          url: "https://www.google.com",
-        },
-      ],
-    },
-  ],
-};
+let defaultData;
 
 // Carica le colonne salvate al caricamento della pagina
 document.addEventListener("DOMContentLoaded", loadColumns);
@@ -449,16 +423,40 @@ function undo() {
 
 undoButton.addEventListener("click", undo);
 
+// Funzione per caricare i dati di default dal file JSON
+async function loadDefaultData() {
+  try {
+    const response = await fetch(
+      chrome.runtime.getURL("assets/json/defaultData.json")
+    );
+    const defaultData = await response.json();
+    return defaultData;
+  } catch (error) {
+    console.error("Errore nel caricamento dei dati di default:", error);
+    return null;
+  }
+}
+
 function loadColumns() {
   //chrome.storage.sync.clear();
-  chrome.storage.sync.get(["columns", "alreadyInstalled"], (data) => {
+  chrome.storage.sync.get(["columns", "alreadyInstalled"], async (data) => {
     if (!data.alreadyInstalled) {
       // Prima installazione: carica i dati predefiniti
-      columnsData = defaultData.columns;
-      chrome.storage.sync.set({
-        columns: JSON.stringify(columnsData),
-        alreadyInstalled: true,
-      });
+
+      // Carica le colonne al caricamento della pagina
+      try {
+        defaultData = await loadDefaultData();
+        console.log("first time defaultData", defaultData);
+
+        columnsData = defaultData.columns;
+        chrome.storage.sync.set({
+          columns: JSON.stringify(columnsData),
+          alreadyInstalled: true,
+        });
+      } catch (error) {
+        console.error("Errore nel caricamento dei dati predefiniti:", error);
+        columnsData = []; // Usa un array vuoto se il caricamento fallisce
+      }
       //alert("Benvenuto! È stato caricato un elenco di link predefiniti.");
     } else if (data.columns) {
       // Carica i dati salvati se esistono
