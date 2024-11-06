@@ -1,56 +1,6 @@
-const showDebug = true;
+const showDebug = false;
 
 const columnsContainer = document.getElementById("columns-container");
-
-// Aggiornare l'ordine delle colonne
-const sortableColumns = new Sortable(columnsContainer, {
-  animation: 150,
-  onEnd: (event) => {
-    // Ottieni l'indice della colonna spostata
-    const movedColumnIndex = event.oldIndex;
-    const newColumnIndex = event.newIndex;
-
-    // Aggiorna columnsData
-    const movedColumn = columnsData.splice(movedColumnIndex, 1)[0]; // Rimuovi la colonna da movedColumnIndex
-    columnsData.splice(newColumnIndex, 0, movedColumn); // Inserisci la colonna alla nuova posizione
-
-    // Salva i dati aggiornati
-    saveColumns();
-  },
-});
-
-// Aggiungi drag-and-drop ai link di ogni colonna
-function initializeLinkSorting() {
-  // Inizializza il drag-and-drop per ogni links-wrapper
-  document
-    .querySelectorAll(".links-wrapper")
-    .forEach((wrapper, columnIndex) => {
-      Sortable.create(wrapper, {
-        group: "shared-links", // Stesso gruppo per permettere spostamento tra colonne
-        animation: 150,
-        handle: ".link-item", // Permette di draggare direttamente il link
-        draggable: ".link-item",
-        onEnd: function (event) {
-          const oldIndex = event.oldIndex;
-          const newIndex = event.newIndex;
-          const fromColumnIndex = Array.from(
-            document.querySelectorAll(".links-wrapper")
-          ).indexOf(event.from);
-          const toColumnIndex = Array.from(
-            document.querySelectorAll(".links-wrapper")
-          ).indexOf(event.to);
-
-          // Aggiorna l'ordine di columnsData in base al movimento
-          const [movedLink] = columnsData[fromColumnIndex].links.splice(
-            oldIndex,
-            1
-          );
-          columnsData[toColumnIndex].links.splice(newIndex, 0, movedLink);
-          saveColumns(); // Salva l'ordine aggiornato
-        },
-      });
-    });
-}
 
 const addColumnButton = document.getElementById("addColumnButton");
 
@@ -76,6 +26,58 @@ const undoButton = document.getElementById("undoButton");
 
 let defaultData;
 
+// Aggiornare l'ordine delle colonne
+const sortableColumns = new Sortable(columnsContainer, {
+  animation: 150,
+  onEnd: (event) => {
+    saveState();
+    // Ottieni l'indice della colonna spostata
+    const movedColumnIndex = event.oldIndex;
+    const newColumnIndex = event.newIndex;
+
+    // Aggiorna columnsData
+    const movedColumn = columnsData.splice(movedColumnIndex, 1)[0]; // Rimuovi la colonna da movedColumnIndex
+    columnsData.splice(newColumnIndex, 0, movedColumn); // Inserisci la colonna alla nuova posizione
+
+    // Salva i dati aggiornati
+    saveColumns();
+  },
+});
+
+// Aggiungi drag-and-drop ai link di ogni colonna
+function initializeLinkSorting() {
+  // Inizializza il drag-and-drop per ogni links-wrapper
+  document
+    .querySelectorAll(".links-wrapper")
+    .forEach((wrapper, columnIndex) => {
+      Sortable.create(wrapper, {
+        group: "shared-links", // Stesso gruppo per permettere spostamento tra colonne
+        animation: 150,
+        handle: ".link-item", // Permette di draggare direttamente il link
+        draggable: ".link-item",
+        onEnd: function (event) {
+          saveState();
+          const oldIndex = event.oldIndex;
+          const newIndex = event.newIndex;
+          const fromColumnIndex = Array.from(
+            document.querySelectorAll(".links-wrapper")
+          ).indexOf(event.from);
+          const toColumnIndex = Array.from(
+            document.querySelectorAll(".links-wrapper")
+          ).indexOf(event.to);
+
+          // Aggiorna l'ordine di columnsData in base al movimento
+          const [movedLink] = columnsData[fromColumnIndex].links.splice(
+            oldIndex,
+            1
+          );
+          columnsData[toColumnIndex].links.splice(newIndex, 0, movedLink);
+          saveColumns(); // Salva l'ordine aggiornato
+        },
+      });
+    });
+}
+
 // Carica le colonne salvate al caricamento della pagina
 document.addEventListener("DOMContentLoaded", function () {
   localizeText();
@@ -85,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function localizeText() {
   document.getElementById("addBoxButtonText").textContent =
     chrome.i18n.getMessage("addBoxButtonText");
-  document.getElementById("undoButtonText").textContent =
-    chrome.i18n.getMessage("undoButtonText");
+  /*   document.getElementById("undoButtonText").textContent =
+    chrome.i18n.getMessage("undoButtonText"); */
   document.getElementById("noneRadioText").textContent =
     chrome.i18n.getMessage("noneRadioText");
   document.getElementById("saveButton").textContent =
