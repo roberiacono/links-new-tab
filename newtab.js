@@ -204,7 +204,6 @@ function addLink(linksWrapper, linkData, columnIndex) {
   let linkAnchor = null;
 
   linkAnchor = document.createElement("a");
-  linkAnchor.target = "_blank";
 
   if (linkData.url) {
     // Create the link as an <a> element
@@ -345,10 +344,19 @@ function openEditModal(linkData, columnIndex, linkIndex, linksWrapper) {
     setTimeout(() => urlInput.focus(), 0);
   }
 
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   // Fetch favicon when URL is updated
   urlInput.addEventListener("change", () => {
     const url = urlInput.value.trim();
-    if (url) {
+    if (url && isValidUrl(url)) {
       const faviconUrl =
         "https://www.google.com/s2/favicons?domain=" + new URL(url).origin;
       faviconPreview.src = faviconUrl;
