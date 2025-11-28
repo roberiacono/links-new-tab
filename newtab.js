@@ -639,3 +639,17 @@ document.getElementById("importInput").addEventListener("change", (event) => {
   reader.readAsText(file);
 });
 
+const menuButton = document.getElementById("menuButton");
+const menuDropdown = document.getElementById("menuDropdown");
+
+menuButton.addEventListener("click", () => {
+    menuDropdown.classList.toggle("hidden");
+});
+
+// Close when clicking outside
+document.addEventListener("click", (e) => {
+    if (!menuButton.contains(e.target) && !menuDropdown.contains(e.target)) {
+        menuDropdown.classList.add("hidden");
+    }
+});
+

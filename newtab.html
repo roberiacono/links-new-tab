@@ -20,10 +20,16 @@
             </button>
 
             <div class="controls-right">
-        <button id="exportButton">Export</button>
-        <input type="file" id="importInput" accept="application/json" style="display: none;">
-        <button id="importButton">Import</button>
-    </div>
+                <div class="menu-wrapper">
+                    <button id="menuButton" class="menu-button">⋮</button>
+
+                    <div id="menuDropdown" class="menu-dropdown hidden">
+                        <button id="exportButton">Export</button>
+                        <input type="file" id="importInput" accept="application/json" style="display: none;">
+                        <button id="importButton">Import</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
         <div id="columns-container" class=""></div>
