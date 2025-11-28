@@ -33,6 +33,9 @@ Made a mistake? The undo feature allows you to revert recent actions, helping yo
 ### Easy Setup and Preloaded Links
 The first time the extension loads, a preselected list of useful links is provided to get started quickly. Customize this initial setup to make it your own.
 
+## Import/Export
+You can simply mport/export your links. 
+
 ## Why You’ll Love It
 
 ### Productivity Enthusiasts
