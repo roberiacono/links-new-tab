@@ -576,3 +576,66 @@ function loadColumns() {
     initializeLinkSorting();
   });
 }
+
+document.getElementById("exportButton").addEventListener("click", () => {
+  chrome.storage.local.get(["columns"], (data) => {
+    const fileData = data.columns || "[]";
+    const blob = new Blob([fileData], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+
+    const now = new Date();
+
+    // Format: 2025-11-28_14-33-10
+    const timestamp =
+    now.getFullYear() + "-" +
+    String(now.getMonth() + 1).padStart(2, "0") + "-" +
+    String(now.getDate()).padStart(2, "0") + "_" +
+    String(now.getHours()).padStart(2, "0") + "-" +
+    String(now.getMinutes()).padStart(2, "0") + "-" +
+    String(now.getSeconds()).padStart(2, "0");
+
+    a.download = `quicklinks-backup-${timestamp}.json`;
+    a.click();
+
+    URL.revokeObjectURL(url);
+  });
+});
+
+
+document.getElementById("importButton").addEventListener("click", () => {
+  document.getElementById("importInput").click();
+});
+
+document.getElementById("importInput").addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+
+      if (!Array.isArray(imported)) {
+        alert("Invalid import file.");
+        return;
+      }
+
+      // Save imported data
+      chrome.storage.local.set({ columns: JSON.stringify(imported) }, () => {
+        alert("Import successful!");
+        // Reload interface
+        columnsData = imported;
+        columnsContainer.innerHTML = "";
+        imported.forEach((col, i) => addColumn(col.title, col.links, i));
+      });
+    } catch (err) {
+      alert("Failed to import JSON.");
+    }
+  };
+
+  reader.readAsText(file);
+});
+

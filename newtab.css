@@ -52,8 +52,35 @@ button.add-link:hover {
 
 #controls {
     display: flex;
-    gap: 10px; /* Spazio tra i pulsanti */
+    gap: 10px; 
     margin-bottom: 20px;
+}
+
+.controls-right {
+    margin-left: auto; /* pushes to the right */
+    display: flex;
+    gap: 10px;
+}
+
+.controls-right button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #f2f2f2;
+    color: #999;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+}
+/* Hover */
+.controls-right button:hover {
+    background: #e7e7e7;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    color: #222
+}
+
+/* Active click effect */
+.controls-right  button:active {
+    transform: scale(0.97);
 }
 
 #addColumnButton {

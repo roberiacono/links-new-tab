@@ -18,6 +18,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
               </svg> <span id="undoButtonText"></span>
             </button>
+
+            <div class="controls-right">
+        <button id="exportButton">Export</button>
+        <input type="file" id="importInput" accept="application/json" style="display: none;">
+        <button id="importButton">Import</button>
+    </div>
+
         </div>
         <div id="columns-container" class=""></div>
     </div>
@@ -71,7 +78,7 @@
 
     <script src="assets/js/Sortable.min.js"></script>
     <script src="assets/js/browser.js"></script>
-    <script src="newtab.min.js"></script>
+    <script src="newtab.js"></script>
 
 </body>
 </html>
